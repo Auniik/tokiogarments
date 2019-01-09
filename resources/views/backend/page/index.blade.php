@@ -17,7 +17,6 @@
                 <tr>
                     <th>Sl</th>
                     <th>Title</th>
-                    <th>View Page</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -28,15 +27,13 @@
                         <td>{{ $i++ }}</td>
                         <td>{{ $page->title }}</td>
                         <td>
-                            <a class="btn btn-primary btn-sm" href="{{ url(str_slug($page->title)) }}" target="_blank"><i class="fa fa-eye"></i></a>
-                        </td>
-                        <td>
                             <div class="btn-group">
-                                <a class="btn btn-primary" href="{{ route('page.edit',$page->id) }}">Edit</a>
+                                <a class="btn btn-warning btn-sm" href="{{ url(str_slug($page->title)) }}" target="_blank"><i class="fa fa-eye"></i></a>
+                                <a class="btn btn-primary btn-sm" href="{{ route('page.edit',$page->id) }}"><i class="fa fa-edit"></i></a>
                                 <form action="{{ route('page.destroy',$page->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger" onclick=" return confirm('Are you Sure')" href="#">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick=" return confirm('Are you Sure')" href="#"><i class="fa fa-trash"></i></button>
                                 </form>
 
                             </div>

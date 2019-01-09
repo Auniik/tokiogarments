@@ -34,11 +34,11 @@
                         </td>
                         <td>
                             <div class="btn-group">
-                                <a class="btn btn-primary" href="{{ route('compliance.edit',$compliance->id) }}">Edit</a>
+                                <a class="btn btn-primary  btn-sm" href="{{ route('compliance.edit',$compliance->id) }}"><i class="fa fa-edit"></i></a>
                                 <form action="{{ route('compliance.destroy',$compliance->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger" onclick=" return confirm('Are you Sure')" href="#">Delete</button>
+                                    <button type="submit" class="btn btn-danger  btn-sm" onclick=" return confirm('Are you Sure')" href="#"><i class="fa fa-trash"></i></button>
                                 </form>
 
                             </div>

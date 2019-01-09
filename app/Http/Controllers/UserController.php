@@ -12,9 +12,13 @@ class UserController extends Controller
         return view('backend.user.profile');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
-        //
+        $users = User::orderBy('created_at', 'asc')->get();
+        return view('backend.user.index', compact('users'));
     }
 
     /**
@@ -24,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.user.create');
     }
 
     /**
@@ -35,7 +39,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+           'name' => 'required',
+           'email' => 'required|email|unique:users',
+           'password' => 'required|min:6',
+           'password_confirmation' => 'required_with:password|same:password|min:6',
+        ]);
+        $data = array();
+        $data['name'] = $request->name;
+        $data['email'] = $request->email;
+        $data['password'] = bcrypt($request->name);
+        User::create($data);
+        return redirect('users')->withSuccess('User added successfully');
     }
 
     /**
@@ -52,24 +67,35 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('backend.user.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'. $user->id,
+            'password' => 'required|min:6',
+            'password_confirmation' =>'required_with:password|same:password|min:6'
+        ]);
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+        return redirect('users')->withSuccess('User Information Updated');
     }
 
     /**
@@ -78,8 +104,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect('users')->withSuccess('User Deleted');
     }
 }

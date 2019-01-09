@@ -2,7 +2,7 @@
 
 Route::group(['middleware' => 'auth'], function () {
     // user profile
-    Route::get('profile','UserController@profile');
+    Route::resource('users', 'UserController');
 
 
 // basic info

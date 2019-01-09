@@ -53,15 +53,15 @@
                         <td>{{ $i++ }}</td>
                         <td>{{ $gallery->category_name }}</td>
                         <td><label>
-                                <a class="btn btn-primary" href="{{  url('sub_category_name',$gallery->id) }}">Sub Category</a>
+                                <a class="btn btn-outline-secondary btn-sm" href="{{  url('sub_category_name',$gallery->id) }}">Sub Category</a>
                                 </label></td>
                         <td>
                             <div class="btn-group">
-                                <a class="btn btn-primary" href="{{ route('gallery_name.edit',$gallery->id) }}">Edit</a>
+                                <a class="btn btn-primary btn-sm" href="{{ route('gallery_name.edit',$gallery->id) }}"><i class="fa fa-edit"></i></a>
                                 <form action="{{ route('gallery_name.destroy',$gallery->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger" onclick=" return confirm('Are you Sure')" href="#">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick=" return confirm('Are you Sure')" href="#"><i class="fa fa-trash"></i></button>
                                 </form>
 
                             </div>
