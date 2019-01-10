@@ -16,8 +16,8 @@
                     @csrf
                     @method('patch')
 
-                    @if( session()->has('update') )
-                        <div class="alert-success notify"> <p>{{ Session::get('update') }}</p> </div>
+                    @if( session()->has('success') )
+                        <div class="alert alert-success">{{ Session::get('success') }}</div><br>
                     @endif
 
                     <div class="form-group">

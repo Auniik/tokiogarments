@@ -9,6 +9,11 @@ use Storage;
 
 class EquimentController extends Controller
 {
+    //frontend
+    public function equipments(){
+        $equipments = Equiment::orderBy('created_at', 'desc')->paginate();
+        return view('frontend.equipement', compact('equipments'));
+    }
     // equipment
     public function index()
     {
@@ -40,9 +45,7 @@ class EquimentController extends Controller
         ]);
 
         $image=$request->file('equipment_image');
-
         $fileName=$image->hashName();
-
         $img=Image::make($image)->resize(540,300);
         $img->save('backend/images/equipment'.$fileName);
         $input['equipment_image']='backend/images/equipment'.$fileName;

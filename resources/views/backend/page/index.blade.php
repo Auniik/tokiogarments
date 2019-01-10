@@ -10,7 +10,10 @@
 @section('content')
 
     <div class="col-md-9">
-        <div class="tile">
+                @if( session()->has('success') )
+                    <div class="alert alert-success">{{ Session::get('success') }}</div>
+                @endif
+                <div class="tile">
             <h3 class="tile-title">Page List</h3>
             <table class="table table-striped">
                 <thead>

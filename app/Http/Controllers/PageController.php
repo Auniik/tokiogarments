@@ -26,36 +26,35 @@ class PageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'url' => 'required',
-            'discription' => 'required',
+            'title' => 'required|unique:pages',
+            'description' => 'required',
         ]);
-
         Page::create([
             'title' => $request->title,
-            'url' => $request->url,
-            'discription' => $request->discription,
+            'url' => str_slug($request->title),
+            'description' => $request->description,
         ]);
 
-        return back()->with('success','Successfully Created');
+        return back()->with('success', 'Successfully Created');
     }
 
     // edit page
-    public function edit($id)
+    public function edit(Page $page)
     {
-        $page = Page::find($id);
-        return view('backend.page.edit',[
-            'page' => $page,
-        ]);
+        return view('backend.page.edit', compact('page'));
     }
 
     // update
-    public function update(Request $request, $id)
+    public function update(Request $request, Page $page)
     {
-        Page::find($id)->update([
+        $request->validate([
+            'title' => 'required',
+            'url' => 'required|unique:pages,url,'.$page->id,
+        ]);
+        $page->update([
             'title' => $request->title,
-            'url' => $request->url,
-            'discription' => $request->discription,
+            'url' => str_slug($request->url),
+            'description' => $request->description,
         ]);
 
         return back()->with('success','Successfully Updated');

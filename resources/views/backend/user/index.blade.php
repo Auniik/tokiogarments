@@ -11,7 +11,7 @@
     <div class="col-md-9">
         <div class="tile">
             @if( session()->has('success') )
-                <div class="alert-success notify"> <p>{{ Session::get('success') }}</p> </div><br>
+                <div class="alert alert-success">{{ Session::get('success') }}</div><br>
             @endif
 
             <h3 class="tile-title">User List</h3>
@@ -25,20 +25,25 @@
                 </tr>
                 </thead>
                 <tbody>
-                @php($i=1)
-                @foreach($users as $user)
+                <?php $sl = $users->firstItem() ?>
+                @foreach($users as $key => $user)
                     <tr>
-                        <td>{{ $i++ }}</td>
+                        <td>{{ $sl++ }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
                             <div class="btn-group">
-                                <a class="btn btn-warning btn-sm" href="" target="_blank"><i class="fa fa-eye"></i></a>
                                 <a class="btn btn-primary btn-sm" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-edit"></i></a>
+
                                 <form action="{{ route('users.destroy',$user->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick=" return confirm('Are you Sure')" href="#"><i class="fa fa-trash-o"></i></button>
+                                    @if ($key == 0 )
+                                        <button  disabled="" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                    @else
+                                        <button class="btn btn-danger btn-sm" onclick=" return confirm('Are you Sure ?')" href="#"><i class="fa fa-trash-o"></i></button>
+                                    @endif
+
                                 </form>
 
                             </div>

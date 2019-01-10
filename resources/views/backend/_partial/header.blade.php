@@ -42,7 +42,7 @@
             </a>
 
             <ul class="dropdown-menu settings-menu dropdown-menu-right">
-                <li><a class="dropdown-item" href="{{ url('profile') }}"><i class="fa fa-user fa-lg"></i> Profile</a></li>
+                {{--<li><a class="dropdown-item" href="{{ url('profile') }}"><i class="fa fa-user fa-lg"></i> Profile</a></li>--}}
                 <a class="dropdown-item" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -71,15 +71,16 @@
 
     <ul class="app-menu">
 
-        <li><a class="app-menu__item {{ $path  == '/' ? 'active' : '' }}" target="_blank" href="{{ url('/') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Visit Site</span></a></li>
-        <li><a class="app-menu__item {{ $path  == 'basic' ? 'active' : '' }}" href="{{ route('basic.index') }}"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Global Setting</span></a>
+        <li><a class="app-menu__item {{ $path  == '/' ? 'active' : '' }}" target="_blank" href="{{ url('/') }}"><i class="app-menu__icon fa fa-external-link"></i></i><span class="app-menu__label">Visit Site</span></a></li>
+        <li><a class="app-menu__item {{ $path  == 'dashboard' ? 'active' : '' }}" href="{{ url('dashboard') }}"><i class="app-menu__icon fa fa-dashboard"></i>  <span class="app-menu__label">Dashboard</span></a>
+        <li><a class="app-menu__item {{ $path  == 'basic' ? 'active' : '' }}" href="{{ route('basic.index') }}"><i class="app-menu__icon fa fa-gear"></i><span class="app-menu__label">Global Settings</span></a>
         </li>
-        <li><a class="app-menu__item {{ starts_with($path, 'slider') ? 'active' : '' }}" href="{{ route('slider.index') }}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Slider</span></a></li>
-        <li><a class="app-menu__item {{ starts_with($path, 'client') ? 'active' : '' }}" href="{{ route('client.index') }}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Client</span></a></li>
-        <li><a class="app-menu__item {{ starts_with($path,  'page') ? 'active' : '' }}" href="{{ route('page.index') }}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Page</span></a></li>
-        <li><a class="app-menu__item {{ starts_with($path,  'equipment') ? 'active' : '' }}" href="{{ route('equipment.index') }}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Equipment</span></a></li>
-        <li><a class="app-menu__item {{ starts_with($path,  'compliance') ? 'active' : '' }}" href="{{ route('compliance.index') }}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Compliance</span></a></li>
-        <li class="treeview"><a class="app-menu__item " href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Photo Gallery</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li><a class="app-menu__item {{ starts_with($path, 'slider') ? 'active' : '' }}" href="{{ route('slider.index') }}"><i class="app-menu__icon fa fa-picture-o"></i><span class="app-menu__label">Slider</span></a></li>
+        <li><a class="app-menu__item {{ starts_with($path, 'client') ? 'active' : '' }}" href="{{ route('client.index') }}"><i class="app-menu__icon fa fa-thumbs-o-up"></i><span class="app-menu__label">Client</span></a></li>
+        <li><a class="app-menu__item {{ starts_with($path,  'page') ? 'active' : '' }}" href="{{ route('page.index') }}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Page</span></a></li>
+        <li><a class="app-menu__item {{ starts_with($path,  'equipment') ? 'active' : '' }}" href="{{ route('equipment.index') }}"><i class="app-menu__icon fa fa-cubes"></i><span class="app-menu__label">Equipment</span></a></li>
+        <li><a class="app-menu__item {{ starts_with($path,  'compliance') ? 'active' : '' }}" href="{{ route('compliance.index') }}"><i class="app-menu__icon fa fa-sitemap"></i><span class="app-menu__label">Compliance</span></a></li>
+        <li class="treeview"><a class="app-menu__item " href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-picture-o"></i><span class="app-menu__label">Photo Gallery</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item {{ starts_with($path,  'gallery_name') ? 'active' : '' }}" href="{{ route('gallery_name.index') }}"><i class="icon fa fa-circle-o"></i> Photo Category</a></li>
                 <li><a class="treeview-item {{ starts_with($path,  'gallery') ? 'active' : '' }}" href="{{ route('gallery.index') }}"><i class="icon fa fa-circle-o"></i> Gallery</a></li>
