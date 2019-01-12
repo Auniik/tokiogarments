@@ -6,7 +6,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 // basic info
-    Route::resource('basic', 'BasicInfoController');
+    Route::get('config', 'BasicInfoController@index')->name('config.index');
+    Route::post('config/save', 'BasicInfoController@store')->name('config.store');
+    Route::post('config/update', 'BasicInfoController@update')->name('config.update');
+    Route::get('config/policy', 'PolicyController@index')->name('policy.index');
+    Route::post('config/policy/save', 'PolicyController@store')->name('policy.store');
+    Route::patch('config/policy/update', 'PolicyController@update')->name('policy.update');
 
 // slider
     Route::resource('slider', 'SliderController');

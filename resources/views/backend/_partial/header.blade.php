@@ -73,7 +73,7 @@
 
         <li><a class="app-menu__item {{ $path  == '/' ? 'active' : '' }}" target="_blank" href="{{ url('/') }}"><i class="app-menu__icon fa fa-external-link"></i></i><span class="app-menu__label">Visit Site</span></a></li>
         <li><a class="app-menu__item {{ $path  == 'dashboard' ? 'active' : '' }}" href="{{ url('dashboard') }}"><i class="app-menu__icon fa fa-dashboard"></i>  <span class="app-menu__label">Dashboard</span></a>
-        <li><a class="app-menu__item {{ $path  == 'basic' ? 'active' : '' }}" href="{{ route('basic.index') }}"><i class="app-menu__icon fa fa-gear"></i><span class="app-menu__label">Global Settings</span></a>
+        <li><a class="app-menu__item  {{ starts_with($path, 'config') ? 'active' : '' }}" href="{{ route('config.index') }}"><i class="app-menu__icon fa fa-gear"></i><span class="app-menu__label">Global Settings</span></a>
         </li>
         <li><a class="app-menu__item {{ starts_with($path, 'slider') ? 'active' : '' }}" href="{{ route('slider.index') }}"><i class="app-menu__icon fa fa-picture-o"></i><span class="app-menu__label">Slider</span></a></li>
         <li><a class="app-menu__item {{ starts_with($path, 'client') ? 'active' : '' }}" href="{{ route('client.index') }}"><i class="app-menu__icon fa fa-thumbs-o-up"></i><span class="app-menu__label">Client</span></a></li>

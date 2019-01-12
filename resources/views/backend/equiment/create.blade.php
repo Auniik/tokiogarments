@@ -21,11 +21,11 @@
 
                     <div class="form-group">
                         <label class="control-label">Equipment Image</label>
-                        <input class="form-control" type="file" name="equipment_image">
-                        @if($errors->has('equipment_image'))
-                            <strong class="text-danger">{{ $errors->first('equipment_image') }}</strong>
+                        <input class="form-control" type="file" name="image">
+                        @if($errors->has('image'))
+                            <strong class="text-danger">{{ $errors->first('image') }}</strong>
                         @endif
-                        <div class="help">[ image size width = 530 pixels x height = 300 pixels ]</div>
+                        <div class="text-secondary">Note: Width and Height of Image should be in 530px * 300px</div>
                     </div>
 
                     <div class="form-group">
@@ -46,7 +46,7 @@
 
                     <div class="form-group">
                         <label class="control-label">Quantity</label>
-                        <input type="text" class="form-control" name="quantity" placeholder="Quantity">
+                        <input type="number" min="0" class="form-control" name="quantity" placeholder="Quantity">
                         @if($errors->has('quantity'))
                             <strong class="text-danger">{{ $errors->first('quantity') }}</strong>
                         @endif
@@ -54,7 +54,7 @@
 
 
                     <div class="tile-footer">
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Submit</button>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add Equipment</button>
                     </div>
                 </form>
             </div>

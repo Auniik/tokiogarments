@@ -22,8 +22,8 @@
 
                     <div class="form-group">
                         <label class="control-label">Equipment Image</label>
-                        <input class="form-control" type="file" name="equipment_image">
-                        <div class="help">[ image size width = 530 pixels x height = 300 pixels ]</div>
+                        <input class="form-control" type="file" name="image">
+                        <div class="text-secondary">Note: Width and Height of Image should be in 530px * 300px</div>
                         <img src="{{ url($equipment->image) }}" class="large-img">
                     </div>
 
@@ -39,12 +39,12 @@
 
                     <div class="form-group">
                         <label class="control-label">Quantity</label>
-                        <input type="text" class="form-control" name="quantity" value="{{ $equipment->quantity }}">
+                        <input type="number" min="0" class="form-control" name="quantity" value="{{ $equipment->quantity }}">
                     </div>
 
 
                     <div class="tile-footer">
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Submit</button>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save Changes</button>
                     </div>
                 </form>
             </div>

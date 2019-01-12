@@ -29,35 +29,28 @@ class EquimentController extends Controller
         return view('backend.equiment.create');
     }
 
-    // store image
-    protected function image(){
-
-    }
-
     // store equipment
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required',
-            'equipment_image' => 'required|mimes:jpg,png,jpeg,svg|max:2048',
+            'image' => 'required|mimes:jpg,png,jpeg,svg|max:2048',
             'brand' => 'required',
             'quantity' => 'required',
         ]);
 
-        $image=$request->file('equipment_image');
-        $fileName=$image->hashName();
-        $img=Image::make($image)->resize(540,300);
-        $img->save('backend/images/equipment'.$fileName);
-        $input['equipment_image']='backend/images/equipment'.$fileName;
-
+        $image = $request->file('image');
+        Storage::makeDirectory($path = file_path('images/equipment/'));
+        $image_path = $path.$image->hashName();
+        Image::make($image)->resize(540, 300)->save($image_path);
         Equiment::create([
-            'image' => $input['equipment_image'],
+            'image' => $image_path,
             'title' => $request->title,
             'brand' => $request->brand,
             'quantity' => $request->quantity,
         ]);
 
-        return back()->with('success','Successfully Inserted');
+        return back()->with('success', 'Equipment Created Successfully!');
 
     }
 
@@ -72,37 +65,33 @@ class EquimentController extends Controller
     }
 
     // update equipment
-    public function update(Request $request, $id)
+    public function update(Request $request, Equiment $equipment)
     {
         $request->validate([
-            'equipment_image' => 'max:2048',
+            'title' => 'required',
+            'image' => 'mimes:jpg,png,jpeg,svg|max:2048',
+            'brand' => 'required',
+            'quantity' => 'required',
         ]);
-        $equipment = Equiment::find($id);
-
-        Storage::delete($equipment->image);
-
-        $image=$request->file('equipment_image');
-
-        $fileName=$image->hashName();
-
-        $img=Image::make($image)->resize(540,300);
-        $img->save('backend/images/equipment'.$fileName);
-        $input['equipment_image']='backend/images/equipment'.$fileName;
-
+        if ($request->hasFile('image')){
+            Storage::delete($equipment->image);
+            $image = $request->file('image');
+            Storage::makeDirectory($path = file_path('images/equipment/'));
+            $image_path = $path.$image->hashName();
+            Image::make($image)->resize(540, 300)->save($image_path);
+            $equipment->update(['image' => $image_path]);
+        }
         $equipment->update([
-            'image' => $input['equipment_image'],
             'title' => $request->title,
             'brand' => $request->brand,
             'quantity' => $request->quantity,
         ]);
-
-        return back()->with('success','Successfully Inserted');
+        return redirect('equipment')->withSuccess('Equipment Updated Successfully!');
     }
 
     // delete Equipment
-    public function destroy($id)
+    public function destroy(Equiment $equipment )
     {
-        $equipment = Equiment::find($id);
         Storage::delete($equipment->image);
         $equipment->delete();
 

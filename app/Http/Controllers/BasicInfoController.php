@@ -10,9 +10,9 @@ class BasicInfoController extends Controller
     // basic info
     public function index()
     {
-        $basic = BasicInfo::find(1);
+        $config = BasicInfo::find(1);
         return view('backend.basic.index',[
-            'basic' => $basic,
+            'config' => $config,
         ]);
     }
 
@@ -23,13 +23,13 @@ class BasicInfoController extends Controller
         $request->validate([
             'logo' => 'max:2048',
         ]);
-        $basic = BasicInfo::find(1);
+        $config = BasicInfo::find(1);
 
         if($request->hasFile('logo')){
             $path = $request->file('logo')->storeAs('backend/images','FxDE2Nv5OpYfKu2LsDQI87ohzmYdNAOcVAELu6DF.png');
-            $basic['logo'] = $path;
+            $config['logo'] = $path;
         }
-        $basic->save();
+        $config->save();
 
         BasicInfo::find(1)->update([
             'title' => $request->title,
@@ -45,5 +45,8 @@ class BasicInfoController extends Controller
 
         return back()->with('success','Successfully Updated');
     }
-
+    public function show(BasicInfo $config)
+    { 
+        //
+    }
 }
