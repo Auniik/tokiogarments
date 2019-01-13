@@ -25,7 +25,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php $sl = $contacts->firstItem() ?>
+                @php ($sl = $contacts->firstItem() )
                 @foreach($contacts as $key => $contact)
                     <tr>
                         <td>{{ $sl++ }}</td>

@@ -9,6 +9,10 @@ use Image;
 
 class PolicyController extends Controller
 {
+    public function policy(Policy $policy){
+        $policy = $policy->first();
+        return view('frontend.policy', compact('policy'));
+    }
     /**
      * Display a listing of the resource.
      *
@@ -45,7 +49,7 @@ class PolicyController extends Controller
             'heading' => 'required',
             'meta_description' => 'required',
             'policy_description' => 'required',
-            'image' => 'required|mimes:jpg,png,jpeg,svg|max:2048',
+            'image' => 'mimes:jpg,png,jpeg,svg|max:2048',
         ]);
         $image = $request->file('image');
         Storage::makeDirectory($path = file_path('images/policy/'));
@@ -69,6 +73,32 @@ class PolicyController extends Controller
     public function edit(Policy $policy)
     {
         return view('backend.basic.policy.edit', compact('policy'));
+    }
+    public function update(Request $request)
+    {
+        $request->validate([
+            'heading' => 'required',
+            'meta_description' => 'required',
+            'policy_description' => 'required',
+            'image' => 'mimes:jpg,png,jpeg,svg|max:2048',
+        ]);
+        $policy = Policy::first();
+        
+        if ($request->hasFile('image')){
+            Storage::delete($policy->image);
+            $image = $request->file('image');
+            Storage::makeDirectory($path = file_path('images/policy/'));
+            $image_path = $path.$image->hashName();
+            
+            Image::make($image)->resize(540, 300)->save($image_path);
+            $policy->update(['image' => $image_path]);
+        }
+        $policy->update([
+            'heading' => $request->heading,
+            'meta_description' => $request->meta_description,
+            'policy_description' => $request->policy_description,
+        ]);
+        return back()->withSuccess('Policy Updated');
     }
 
 

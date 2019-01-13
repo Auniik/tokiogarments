@@ -68,7 +68,7 @@
                                  <p class="info-subtitle">{{ $basic->email }}</p>
                               </div>
                            </li>
-                           
+
                         </ul>
                      </div>
                      <!-- Col End-->
@@ -84,7 +84,7 @@
                         aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"><i class="icon icon-menu"></i></span></button>
                      <!-- End of Navbar toggler-->
                      <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
-                        
+
                         <ul class="navbar-nav">
                            {{--@foreach($menus as $menu)--}}
 {{--                                 <li class="nav-item dropdown"><a class="nav-link" href="{{ URL::to($menu->page_url) }}" data-toggle="dropdown">{{ $menu->page_name }}</a>--}}
@@ -98,17 +98,17 @@
                                        </ul>
                                  </li>
                            {{--@endforeach--}}
-                           
-                  
+
+
                         </ul>
                         <!--Nav ul end-->
                      </div>
-                  
+
                   </nav>
                   <!-- Collapse end-->
 
-                  
-                  
+
+
                </div>
             </div>
             <!-- Site nav inner end-->
@@ -117,13 +117,13 @@
       </div>
 
 @yield('body')
-      
+
       <!-- Footer start-->
       <footer class="footer" id="footer">
          <div class="footer-main bg-overlay">
             <div class="container">
                <div class="row">
-                 
+
                   <div class="col-lg-4 col-md-6 footer-widget">
                      <h3 class="widget-title">Company Locations</h3>
                      <div class="ts-contact-info"><span class="ts-contact-icon float-left"><i class="icon icon-map-marker2"></i></span>
@@ -133,7 +133,7 @@
                         </div>
                         <!-- Contact content end-->
                      </div>
-                     
+
                      <div class="ts-contact-info last"><span class="ts-contact-icon float-left"><i class="icon icon-envelope"></i></span>
                         <div class="ts-contact-content">
                            <h3 class="ts-contact-title">Email Address</h3>
@@ -176,11 +176,11 @@
                   <div class="col-lg-6 col-md-12">
                     <div class="footer-social text-right">
                         <ul>
-                           <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                           <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                           <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                           <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                           <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            @foreach ($socials as $social)
+                                <li><a href="{{url($social->profile_link)}}"><i class="{{$social->icon}}"></i></a></li>
+                            @endforeach
+
+
                         </ul>
                      </div>
                   </div>

@@ -4,7 +4,7 @@
    Author URI: https://themehunt.com/profile/Tripples
    Description: BizCraft | The Multi-Purpose HTML5 Template
    Version: 1.0
-   
+
 */
 
 /* Table of Content
@@ -3052,7 +3052,7 @@ h5.mb-0 .project-btn span{
     font-weight: 700;
 }
 
-/* Intro Area 
+/* Intro Area
 ================================================== */
 .ts-intro {
   padding-bottom: 80px;
@@ -6229,7 +6229,7 @@ label {
     text-align: center;
     padding-top: 15px;
 }
-.equipment-content h5{    
+.equipment-content h5{
     padding: 10px 0px;
     margin: 0;
     color: #313131;
@@ -6271,6 +6271,22 @@ iframe{
   border: none;
 }
 
+a .fa-google:hover{
+    background: #ea4335;
+}
+
+a .fa-reddit:hover{
+    background: #ff4500;
+}
+a .fa-skype:hover{
+    background: #00aff0;
+}
+a .fa-tumblr:hover{
+    background: #035465;
+}
+a .fa-vine:hover{
+    background: #00b488;
+}
 
 
 

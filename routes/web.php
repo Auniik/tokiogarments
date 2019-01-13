@@ -35,6 +35,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('sub_category_name','GallerySubCategoryController');
     Route::resource('gallery', 'ImageGalleryController');
 
+    //Socials
+    Route::resource('social', 'SocialController');
+    Route::patch('social/{social}/status', 'SocialController@status')->name('route.status');
+
     //contact
 
     Route::get('dashboard', 'ContactController@messages')->name('contact.messages');
@@ -49,11 +53,11 @@ Route::get('/', 'HomeController@index')->name('root');
 Route::get('contact', 'ContactController@index')->name('contact.index');
 Route::post('contact', 'ContactController@send')->name('contact.send');
 Route::get('equipments', 'EquimentController@equipments');
+Route::get('policy', 'PolicyController@policy')->name('policy.page');
+
+
 Route::get('/photogallery', function (){
     return view('frontend.gallery');
-});
-Route::get('/policy', function (){
-    return view('frontend.policy');
 });
 Route::get('/printing', function (){
     return view('frontend.printing');

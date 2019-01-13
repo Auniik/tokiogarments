@@ -12,7 +12,7 @@
     <div class="col-md-8">
         <div class="tile">
             <div class="tile-body">
-                <form action="{{ route('policy.update',$policy->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('policy.update') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('patch')
 
@@ -22,20 +22,29 @@
 
                     <div class="form-group">
                         <label class="control-label">Heading</label>
-                        <input class="form-control" type="text" name="title" value="{{ $policy->heading }}">
+                        <input class="form-control {{($errors->has('heading')) ? 'is-invalid' : ''}}" type="text" name="heading" value="{{ $policy->heading }}">
+                        @if($errors->has('heading'))
+                            <div class="invalid-feedback">{{$errors->first('heading')}}</div>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label class="control-label">Meta Description</label>
-                        <textarea name="meta_discription" class="form-control" rows="5">{{ $policy->meta_description }}</textarea>
+                        <textarea name="meta_description" class="form-control {{($errors->has('meta_description')) ? 'is-invalid' : ''}}" rows="5">{{ $policy->meta_description }}</textarea>
+                        @if($errors->has('meta_description'))
+                            <div class="invalid-feedback">{{$errors->first('meta_description')}}</div>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label class="control-label">Image</label>
-                        <input class="form-control" type="file" name="image">
-                        <img class="img-fluid" src="{{url($policy->image)}}"
+                        <input class="form-control {{($errors->has('image')) ? 'is-invalid' : ''}}" type="file" name="image">
+                        <img class="img-fluid" src="{{url($policy->image)}}"/>
+                        @if($errors->has('image'))
+                            <div class="invalid-feedback">{{$errors->first('image')}}</div>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label class="form-label">Policy Description</label>
-                        <textarea class="form-control {{($errors->has('policy_description')) ? 'is-invalid' : ''}}"  name="description" id="trumbowyg-demo" cols="30" rows="10">{{ $policy->policy_description}}</textarea>
+                        <textarea class="form-control {{($errors->has('policy_description')) ? 'is-invalid' : ''}}"  name="policy_description" id="trumbowyg-demo" cols="30" rows="10">{{ $policy->policy_description}}</textarea>
                         @if($errors->has('policy_description'))
                             <div class="invalid-feedback">{{$errors->first('policy_description')}}</div>
                         @endif

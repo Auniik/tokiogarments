@@ -86,7 +86,8 @@
                 <li><a class="treeview-item {{ starts_with($path,  'gallery') ? 'active' : '' }}" href="{{ route('gallery.index') }}"><i class="icon fa fa-circle-o"></i> Gallery</a></li>
             </ul>
         </li>
-        <li><a class="app-menu__item {{ starts_with($path,  'users') ? 'active' : '' }}" href="{{ route('users.index') }}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">User Management</span></a></li>
+        <li><a class="app-menu__item {{ starts_with($path,  'social') ? 'active' : '' }}" href="{{ route('social.index') }}"><i class="app-menu__icon fa fa-link"></i><span class="app-menu__label"> Social Profiles</span></a></li>
+        <li><a class="app-menu__item {{ starts_with($path,  'users') ? 'active' : '' }}" href="{{ route('users.index') }}"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label"> User Management</span></a></li>
     </ul>
 
 </aside>
