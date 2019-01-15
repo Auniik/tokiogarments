@@ -23,7 +23,7 @@
             @csrf
             <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
             <div class="form-group">
-                <label class="control-label">USERNAME</label>
+                <label class="control-label">EMAIL</label>
                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
 
                 @if ($errors->has('email'))
@@ -42,14 +42,10 @@
                     </span>
                 @endif
             </div>
-            <div class="form-group">
-                <div class="utility">
-                    <div class="animated-checkbox">
-                        <label>
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                        </label>
-                    </div>
-                </div>
+            <div class="animated-checkbox">
+                <label>
+                    <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}><span class="label-text">Remember Me</span>
+                </label>
             </div>
             <div class="form-group btn-container">
                 <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>

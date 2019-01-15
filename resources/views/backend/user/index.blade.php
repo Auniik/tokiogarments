@@ -27,18 +27,26 @@
                 <tbody>
                 @php($i=1)
                 @foreach($users as $key => $user)
+{{--                    {{dd($admin->id==$user->id)}}--}}
                     <tr>
                         <td>{{ $i++ }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
                             <div class="btn-group">
+
                                 <a class="btn btn-warning btn-sm" href="" target="_blank"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-primary btn-sm" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-edit"></i></a>
+
+                                @if($key==0 && ($admin->id==$user->id))
+                                    <a class="btn btn-primary btn-sm" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-edit"></i></a>
+                                @else
+                                    <a class="btn btn-primary btn-sm" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-edit"></i></a>
+                                    {{--<a class="btn btn-primary btn-sm" href="#"><i class="fa fa-edit"></i></a>--}}
+                                @endif
                                 <form action="{{ route('users.destroy',$user->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick=" return confirm('Are you Sure')" href="#"><i class="fa fa-trash-o"></i></button>
+                                    <button type="submit" {{ $key==0 ? 'disabled' : '' }} class="btn btn-danger btn-sm" onclick=" return confirm('Are you Sure')" href="#"><i class="fa fa-trash-o"></i></button>
                                 </form>
 
                             </div>

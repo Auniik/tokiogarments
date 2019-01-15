@@ -75,8 +75,11 @@
 						</p>
 					</div>
 				</div>
+
 				<div class="col-md-5">
+
 					<div class="feature-item">
+
 						<img src="{{ asset('/') }}frontend/images/product/01.jpg">
 						<h2><strong>Image:</strong>Our Printing  Product</h2>
 					</div>

@@ -23,6 +23,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('page','PageController');
     Route::get('page/{title}','PageController@single_page');
 
+//Production Unit
+    Route::resource('productions','Production\ProductionUnitController');
+    Route::resource('production/categories','Production\ProductionCategoryController');
+
+    Route::resource('production/sliders','Production\ProductionSliderController');
+
+    Route::resource('production/equipments','Production\ProductionEquipmentController');
+
 // Equiment
     Route::resource('equipment','EquimentController');
 
@@ -52,7 +60,7 @@ Route::get('/', 'HomeController@index')->name('root');
 //contact
 Route::get('contact', 'ContactController@index')->name('contact.index');
 Route::post('contact', 'ContactController@send')->name('contact.send');
-Route::get('equipments', 'EquimentController@equipments');
+Route::get('equipments', 'EquimentController@equipments')->name('equipments.all');
 Route::get('policy', 'PolicyController@policy')->name('policy.page');
 
 
@@ -60,7 +68,7 @@ Route::get('/photogallery', function (){
     return view('frontend.gallery');
 });
 Route::get('/printing', function (){
-    return view('frontend.printing');
+    return view('frontend.production.printing');
 });
 Route::get('/products', function (){
     return view('frontend.products');

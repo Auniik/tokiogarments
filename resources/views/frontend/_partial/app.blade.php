@@ -202,24 +202,58 @@
       <script type="text/javascript" src="{{ asset('/') }}frontend/js/jquery.js"></script>
       <!-- Bootstrap jQuery-->
       <script type="text/javascript" src="{{ asset('/') }}frontend/js/bootstrap.min.js"></script>
-      <!-- Owl Carousel-->
-      <script type="text/javascript" src="{{ asset('/') }}frontend/js/owl.carousel.min.js"></script>
+
       <!-- Smoothscroll-->
       <script type="text/javascript" src="{{ asset('/') }}frontend/js/smoothscroll.js"></script>
       <!-- Template custom-->
       <script type="text/javascript" src="{{ asset('/') }}frontend/js/custom.js"></script>
+       <!-- Owl Carousel-->
+       <script type="text/javascript" src="{{ asset('/') }}frontend/js/owl.carousel.min.js"></script>
    </div>
    <!--Body Inner end-->
 
+   //OWL Carousel
+
+   <script>
+       $(document).ready(function() {
+
+           $("#owl-demo").owlCarousel({
+
+               navigation : true, // Show next and prev buttons
+               slideSpeed : 600,
+               paginationSpeed : 400,
+               singleItem:true,
+               loop:true,
+               autoplay:true,
+               autoplayTimeout:3000,
+               autoplayHoverPause:true,
+
+               // "singleItem:true" is a shortcut for:
+               items : 1,
+               // itemsDesktop : false,
+               // itemsDesktopSmall : false,
+               // itemsTablet: false,
+               // itemsMobile : false
+
+           });
+
+       });
+   </script>
+
 
    <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.1';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+        <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.1';
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+
+
+
+
 </body>
 
 </html>
