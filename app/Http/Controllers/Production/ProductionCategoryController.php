@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Production;
 
 use App\Model\ProductionCategory;
+use App\Model\ProductionUnit;
+use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,9 +17,9 @@ class ProductionCategoryController extends Controller
      */
     public function index()
     {
-
-        $productionCategories = ProductionCategory::where('status', 1)->get();
-        return view('backend.production.category.index', compact('productionCategories'));
+        $productionUnits = ProductionUnit::where('status',1)->get();
+        $productionCategories = ProductionCategory::paginate();
+        return view('backend.production.category.index', compact('productionCategories','productionUnits'));
     }
 
     /**
@@ -27,9 +29,7 @@ class ProductionCategoryController extends Controller
      */
     public function create()
     {
-        $categories = ProductionCategory::where('status', 1)->get();
 
-        return view('backend.production.category.create', compact('categories'));
     }
 
     /**
@@ -40,7 +40,13 @@ class ProductionCategoryController extends Controller
      */
     public function store(Request $request)
     {
-
+        $request->validate([
+            'name' => 'required',
+            'production_unit_id' => 'required',
+        ]);
+//        dd($request->all());
+        ProductionCategory::create($request->all());
+        return back()->withSuccess('Category for Production unit added successfully');
     }
 
     /**
@@ -62,7 +68,8 @@ class ProductionCategoryController extends Controller
      */
     public function edit(ProductionCategory $productionCategory)
     {
-        //
+        $productionUnits = ProductionUnit::where('status',1)->get();
+        return view('backend.production.category.edit', compact('productionUnits', 'productionCategory'));
     }
 
     /**
@@ -74,7 +81,13 @@ class ProductionCategoryController extends Controller
      */
     public function update(Request $request, ProductionCategory $productionCategory)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'production_unit_id' => 'required',
+        ]);
+//        dd($request);
+        $productionCategory->update($request->all());
+        return back()->withSuccess('Category for Production unit updated successfully');
     }
 
     /**

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductionEquipment extends Model
 {
-    protected $fillable = ['item', 'quality', 'status', 'production_unit_id'];
+    protected $fillable = ['item', 'quantity', 'status', 'production_unit_id'];
 
     public function productionUnit()
     {

@@ -74,6 +74,15 @@
         <li><a class="app-menu__item {{ $path  == '/' ? 'active' : '' }}" target="_blank" href="{{ url('/') }}"><i class="app-menu__icon fa fa-external-link"></i></i><span class="app-menu__label">Visit Site</span></a></li>
         <li><a class="app-menu__item {{ $path  == 'dashboard' ? 'active' : '' }}" href="{{ url('dashboard') }}"><i class="app-menu__icon fa fa-dashboard"></i>  <span class="app-menu__label">Dashboard</span></a>
         <li><a class="app-menu__item  {{ starts_with($path, 'config') ? 'active' : '' }}" href="{{ route('config.index') }}"><i class="app-menu__icon fa fa-gear"></i><span class="app-menu__label">Global Settings</span></a>
+        <li class="treeview"><a class="app-menu__item " href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-picture-o"></i><span class="app-menu__label">Production Unit</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item {{ starts_with($path,  'production-unit') ? 'active' : '' }}" href="{{ route('production-unit.index') }}"><i class="icon fa fa-circle-o"></i> Units</a></li>
+                <li><a class="treeview-item {{ starts_with($path,  'production-categories') ? 'active' : '' }}" href="{{ route('production-categories.index') }}"><i class="icon fa fa-circle-o"></i> Categories</a></li>
+                <li><a class="treeview-item {{ starts_with($path,  'production-equipments') ? 'active' : '' }}" href="{{ route('production-equipments.index') }}"><i class="icon fa fa-circle-o"></i> Equipments</a></li>
+                <li><a class="treeview-item {{ starts_with($path,  'production-sliders') ? 'active' : '' }}" href="{{ route('production-sliders.index') }}"><i class="icon fa fa-circle-o"></i> Sliders</a></li>
+
+            </ul>
+        </li>
         </li>
         <li><a class="app-menu__item {{ starts_with($path, 'slider') ? 'active' : '' }}" href="{{ route('slider.index') }}"><i class="app-menu__icon fa fa-picture-o"></i><span class="app-menu__label">Slider</span></a></li>
         <li><a class="app-menu__item {{ starts_with($path, 'client') ? 'active' : '' }}" href="{{ route('client.index') }}"><i class="app-menu__icon fa fa-thumbs-o-up"></i><span class="app-menu__label">Client</span></a></li>

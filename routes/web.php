@@ -24,12 +24,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('page/{title}','PageController@single_page');
 
 //Production Unit
-    Route::resource('productions','Production\ProductionUnitController');
-    Route::resource('production/categories','Production\ProductionCategoryController');
+//    Route::resource('production','Production\ProductionUnitController');
+    Route::resource('production-categories','Production\ProductionCategoryController');
 
-    Route::resource('production/sliders','Production\ProductionSliderController');
+    Route::resource('production-sliders','Production\ProductionSliderController');
 
-    Route::resource('production/equipments','Production\ProductionEquipmentController');
+    Route::resource('production-equipments','Production\ProductionEquipmentController');
+    Route::resource('production-unit','Production\ProductionUnitController');
 
 // Equiment
     Route::resource('equipment','EquimentController');

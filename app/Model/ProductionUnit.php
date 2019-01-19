@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductionUnit extends Model
 {
-    protected $fillable = ['name', 'space', 'slug', 'capacity', 'image_details'];
+    protected $fillable = ['name', 'space', 'slug', 'capacity', 'status', 'image_details', ];
 
     public function images()
     {

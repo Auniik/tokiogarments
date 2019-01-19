@@ -212,7 +212,7 @@
    </div>
    <!--Body Inner end-->
 
-   //OWL Carousel
+   {{--OWL Carousel--}}
 
    <script>
        $(document).ready(function() {

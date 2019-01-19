@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Production;
 
 use App\Model\ProductionEquipment;
+use App\Model\ProductionUnit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,8 +16,9 @@ class ProductionEquipmentController extends Controller
      */
     public function index()
     {
-        $productionEquipments = ProductionEquipment::where('status', 1)->get();
-        return view('backend.production.equipment.index', compact('productionEquipments'));
+        $productionUnits = ProductionUnit::where('status',1)->get();
+        $productionEquipments = ProductionEquipment::get();
+        return view('backend.production.equipment.index', compact('productionUnits','productionEquipments'));
     }
 
     /**
@@ -37,13 +39,19 @@ class ProductionEquipmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'item' => 'required',
+            'quantity' => 'required',
+            'production_unit_id' => 'required',
+        ]);
+        ProductionEquipment::create($request->all());
+        return back()->withSuccess('Equipment for Production unit added successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  ProductionEquipment $productionEquipment
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -54,30 +62,40 @@ class ProductionEquipmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  ProductionEquipment $productionEquipment
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ProductionEquipment $productionEquipment)
     {
-        //
+        $productionUnits = ProductionUnit::where('status',1)->get();
+//        dd($productionEquipment->production_unit_id);
+
+        return view('backend.production.equipment.edit', compact('productionUnits', 'productionEquipment'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  ProductionEquipment $productionEquipment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, ProductionEquipment $productionEquipment)
     {
-        //
+        $request->validate([
+            'item' => 'required',
+            'quantity' => 'required',
+            'production_unit_id' => 'required',
+        ]);
+
+        $productionEquipment->update($request->all());
+        return back()->withSuccess('Category for Production unit updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  ProductionEquipment $productionEquipment
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

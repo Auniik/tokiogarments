@@ -79,6 +79,7 @@ class SocialController extends Controller
     {
         //
     }
+
     public function status(Request $request, Social $social)
     {
         if($social->status){
@@ -86,13 +87,13 @@ class SocialController extends Controller
                 'status' => 0,
             ]);
 
-            return back()->withSuccess('Social Link Published');
+            return back()->withSuccess('Social Link Unpublished');
         }
         else{
             $social->update([
                 'status' => 1,
             ]);
-            return back()->withSuccess('Social Link Unpublished');
+            return back()->withSuccess('Social Link Published');
         }
 
     }
