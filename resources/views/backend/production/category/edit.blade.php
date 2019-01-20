@@ -48,12 +48,12 @@
                         <label>Status</label>
                         <select class="form-control" name="status">
                             <option {{$productionCategory->status == 1 ? 'selected' : ''}} value="1"> Active</option>
-                            <option {{$productionCategory->status == 0 ? 'selected' : ''}} fvalue="0"> Inactive</option>
+                            <option {{$productionCategory->status == 0 ? 'selected' : ''}} value="0"> Inactive</option>
                         </select>
                     </div>
 
                     <div class="tile-footer">
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add Equipment</button>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save Changes</button>
                     </div>
                 </form>
             </div>

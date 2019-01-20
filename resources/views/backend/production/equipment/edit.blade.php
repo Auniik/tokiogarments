@@ -12,7 +12,7 @@
         <div class="tile">
             <div class="tile-body">
                 {{--{{$productionCategory->id}}--}}
-                <form action="{{route('production-categories.update', $productionEquipment)}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('production-equipments.update', $productionEquipment)}}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('patch')
 
@@ -44,7 +44,7 @@
 
                     <div class="form-group">
                         <label class="control-label">Quantity</label>
-                        <input type="number" min="0" class="form-control {{($errors->has('quantity')) ? 'is-invalid' : ''}}" name="quantity" placeholder="Enter Item Name. Example: Plain Machine (1+2 Needle)" value="{{$productionEquipment->quantity}}">
+                        <input type="number" min="0" class="form-control {{($errors->has('quantity')) ? 'is-invalid' : ''}}" name="quantity" placeholder="Enter Item quantity." value="{{$productionEquipment->quantity}}">
                         @if($errors->has('quantity'))
                             <div class="invalid-feedback">{{$errors->first('quantity')}}</div>
                         @endif
@@ -59,7 +59,7 @@
                     </div>
 
                     <div class="tile-footer">
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add Equipment</button>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save Changes</button>
                     </div>
                 </form>
             </div>

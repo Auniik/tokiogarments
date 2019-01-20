@@ -2,12 +2,32 @@
 
 namespace App\Http\Controllers\Production;
 
+use App\Model\ProductionCategory;
+use App\Model\ProductionEquipment;
+use App\Model\ProductionSlider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\ProductionUnit;
 
 class ProductionUnitController extends Controller
 {
+    public function productionUnit(ProductionUnit $slug)
+    {
+        if ($slug->slug){
+            $equipments = ProductionEquipment::where([['production_unit_id', $slug->id],['status',1]])->get();
+            $categories = ProductionCategory::where([['production_unit_id', $slug->id],['status',1]])->get()->split(3);
+            $categories = $categories->reverse();
+            $images = ProductionSlider::where([['production_unit_id', $slug->id],['status',1]])->get();
+
+            return view('frontend.production-unit', compact('slug', 'equipments', 'categories', 'images'));
+        }
+        else{
+            return redirect('contact');
+        }
+
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -87,7 +107,7 @@ class ProductionUnitController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'slug' => 'required|unique:production_units',
+            'slug' => 'required|unique:production_units,slug,'.$productionUnit->id,
             'space' => 'required|max:50',
             'capacity' => 'required|max:50',
             'image_details' => 'required|max:190',
@@ -97,6 +117,7 @@ class ProductionUnitController extends Controller
         $data['space'] = $request->space;
         $data['capacity'] = $request->capacity;
         $data['image_details'] = $request->image_details;
+        $data['status'] = $request->status;
         $productionUnit->update($data);
         return back()->withSuccess('Production unit updated successfully');
     }
@@ -109,6 +130,7 @@ class ProductionUnitController extends Controller
      */
     public function destroy(ProductionUnit $productionUnit)
     {
-        //
+        $productionUnit->delete();
+        return back()->withSuccess('Production Unit Deleted');
     }
 }

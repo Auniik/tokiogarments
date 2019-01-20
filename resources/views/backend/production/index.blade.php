@@ -4,17 +4,20 @@
 @section('PageHead','Production Unit')
 @section('PageName','Tokio Garments Limited')
 @section('PageUrl')
-    <a href="{{route('production-unit.index')}}">Production Unit</a>
+    <a href="{{route('production-units.index')}}">Production Unit</a>
 @endsection
 
 @section('content')
+
     <div class="col-md-9">
         @if( session()->has('success') )
             <div class="alert alert-success">{{ Session::get('success') }}</div>
         @endif
         <div class="tile">
+            <h3 class="tile-title">Add Production Unit</h3><hr>
+
             {{--<div class="tile-body">--}}
-            <form action="{{route('production-unit.store')}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('production-units.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
 
 
@@ -67,19 +70,21 @@
                 </div>
 
                 <div class="tile-footer">
-                    <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add Equipment</button>
+                    <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add Production Unit</button>
                 </div>
             </form>
             {{--</div>--}}
+        </div>
+    </div>
 
-            <hr>
-            <h3 class="tile-title">Equipments</h3>
+    <div class="col-md-12">
+        <div class="tile">
+            <h3 class="tile-title">Production Units</h3>
             <table class="table table-striped">
                 <thead>
                 <tr>
                     <th>Sl</th>
                     <th>Name</th>
-                    <th>Slug</th>
                     <th>Floor Space</th>
                     <th>Capacity</th>
                     <th>Image Details</th>
@@ -93,15 +98,14 @@
                     <tr>
                         <td>{{ $i++ }}</td>
                         <td>{{ $unit->name }}</td>
-                        <td>{{ $unit->slug }}</td>
                         <td>{{ $unit->space }}</td>
                         <td>{{ $unit->capacity }}</td>
                         <td>{{ $unit->image_details }}</td>
                         <td>{{ $unit->status }}</td>
                         <td>
                             <div class="btn-group">
-                                <a class="btn btn-primary btn-sm" href="{{ route('production-unit.edit',$unit) }}"><i class="fa fa-edit"></i></a>
-                                <form action="{{ route('production-unit.destroy',$unit) }}" method="post">
+                                <a class="btn btn-primary btn-sm" href="{{ route('production-units.edit',$unit) }}"><i class="fa fa-edit"></i></a>
+                                <form action="{{ route('production-units.destroy',$unit) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick=" return confirm('Are you Sure')" href="#"><i class="fa fa-trash"></i></button>
@@ -115,6 +119,9 @@
 
                 </tbody>
             </table>
+            <div>
+                {{$productionUnits->links()}}
+            </div>
         </div>
     </div>
 @endsection

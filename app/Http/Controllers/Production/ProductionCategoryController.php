@@ -18,7 +18,7 @@ class ProductionCategoryController extends Controller
     public function index()
     {
         $productionUnits = ProductionUnit::where('status',1)->get();
-        $productionCategories = ProductionCategory::paginate();
+        $productionCategories = ProductionCategory::orderBy('production_unit_id', 'asc')->paginate(20);
         return view('backend.production.category.index', compact('productionCategories','productionUnits'));
     }
 
@@ -68,7 +68,7 @@ class ProductionCategoryController extends Controller
      */
     public function edit(ProductionCategory $productionCategory)
     {
-        $productionUnits = ProductionUnit::where('status',1)->get();
+        $productionUnits = ProductionUnit::where('status', 1)->get();
         return view('backend.production.category.edit', compact('productionUnits', 'productionCategory'));
     }
 
@@ -98,6 +98,7 @@ class ProductionCategoryController extends Controller
      */
     public function destroy(ProductionCategory $productionCategory)
     {
-        //
+        $productionCategory->delete();
+        return back()->withSuccess('Category Deleted');
     }
 }

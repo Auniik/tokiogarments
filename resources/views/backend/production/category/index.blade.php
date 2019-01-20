@@ -4,12 +4,11 @@
 @section('PageHead','Categories')
 @section('PageName','Tokio Garments Limited')
 @section('PageUrl')
-    <a href="{{route('production-categories.create')}}">Add Category</a>
+    <a href="{{route('production-units.create')}}">Production Unit</a>
 @endsection
 
 @section('content')
     <div class="col-md-9">
-
         <div class="tile">
             <form action="{{route('production-categories.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
@@ -51,7 +50,10 @@
                     <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add Category</button>
                 </div>
             </form>
-            <hr>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="tile">
             <h3 class="tile-title">Categories</h3>
             <table class="table table-striped">
                 <thead>
@@ -64,7 +66,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @php($i=1)
+                @php($i = $productionCategories->firstItem())
                 @foreach($productionCategories as $category)
                     <tr>
                         <td>{{ $i++ }}</td>
@@ -89,6 +91,9 @@
 
                 </tbody>
             </table>
+            <div>
+                {{$productionCategories->links()}}
+            </div>
         </div>
     </div>
 @endsection

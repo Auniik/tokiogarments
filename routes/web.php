@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('production-sliders','Production\ProductionSliderController');
 
     Route::resource('production-equipments','Production\ProductionEquipmentController');
-    Route::resource('production-unit','Production\ProductionUnitController');
+    Route::resource('production-units','Production\ProductionUnitController');
 
 // Equiment
     Route::resource('equipment','EquimentController');
@@ -63,6 +63,8 @@ Route::get('contact', 'ContactController@index')->name('contact.index');
 Route::post('contact', 'ContactController@send')->name('contact.send');
 Route::get('equipments', 'EquimentController@equipments')->name('equipments.all');
 Route::get('policy', 'PolicyController@policy')->name('policy.page');
+
+Route::get('production-unit/{slug}', 'Production\ProductionUnitController@productionUnit')->name('production-unit.slug');
 
 
 Route::get('/photogallery', function (){

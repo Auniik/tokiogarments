@@ -17,7 +17,7 @@ class ProductionEquipmentController extends Controller
     public function index()
     {
         $productionUnits = ProductionUnit::where('status',1)->get();
-        $productionEquipments = ProductionEquipment::get();
+        $productionEquipments = ProductionEquipment::orderBy('production_unit_id', 'asc')->paginate(20);
         return view('backend.production.equipment.index', compact('productionUnits','productionEquipments'));
     }
 
@@ -54,7 +54,7 @@ class ProductionEquipmentController extends Controller
      * @param  ProductionEquipment $productionEquipment
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ProductionEquipment $productionEquipment)
     {
         //
     }
@@ -67,9 +67,7 @@ class ProductionEquipmentController extends Controller
      */
     public function edit(ProductionEquipment $productionEquipment)
     {
-        $productionUnits = ProductionUnit::where('status',1)->get();
-//        dd($productionEquipment->production_unit_id);
-
+        $productionUnits = ProductionUnit::where('status', 1)->get();
         return view('backend.production.equipment.edit', compact('productionUnits', 'productionEquipment'));
     }
 
@@ -98,8 +96,9 @@ class ProductionEquipmentController extends Controller
      * @param  ProductionEquipment $productionEquipment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ProductionEquipment $productionEquipment)
     {
-        //
+        $productionEquipment->delete();
+        return back()->withSuccess('Equipment Deleted');
     }
 }

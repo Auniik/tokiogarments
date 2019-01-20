@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductionUnit extends Model
 {
-    protected $fillable = ['name', 'space', 'slug', 'capacity', 'status', 'image_details', ];
+    protected $fillable = ['name', 'space', 'slug', 'capacity', 'status', 'image_details'];
 
     public function images()
     {
@@ -21,5 +21,10 @@ class ProductionUnit extends Model
     public function equipments()
     {
         return $this->hasMany(ProductionEquipment::class)->where('status', 1);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

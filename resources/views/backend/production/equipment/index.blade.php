@@ -4,7 +4,7 @@
 @section('PageHead','Production Equipments')
 @section('PageName','Tokio Garments Limited')
 @section('PageUrl')
-    <a href="{{route('production-unit.index')}}">Production Unit</a>
+    <a href="{{route('production-units.index')}}">Production Unit</a>
 @endsection
 
 @section('content')
@@ -61,28 +61,31 @@
                 </div>
             </form>
             {{--</div>--}}
+        </div>
+    </div>
 
-            <hr>
+    <div class="col-md-12">
+        <div class="tile">
             <h3 class="tile-title">Equipments</h3>
             <table class="table table-striped">
                 <thead>
                 <tr>
                     <th>Sl</th>
-                    <th>Production Unit</th>
-                    <th>Title</th>
+                    <th>Item Name</th>
                     <th>Quantity</th>
+                    <th>Production Unit</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                @php($i=1)
+                @php($i = $productionEquipments->firstItem())
                 @foreach($productionEquipments as $equipment)
                     <tr>
                         <td>{{ $i++ }}</td>
-                        <td>{{ $equipment->productionUnit->name }}</td>
                         <td>{{ $equipment->item }}</td>
                         <td>{{ $equipment->quantity }}</td>
+                        <td>{{ $equipment->productionUnit->name }}</td>
                         <td>{{ $equipment->status }}</td>
                         <td>
                             <div class="btn-group">
@@ -101,6 +104,9 @@
 
                 </tbody>
             </table>
+            <div>
+                {{$productionEquipments->links()}}
+            </div>
         </div>
     </div>
 @endsection
