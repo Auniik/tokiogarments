@@ -26,9 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
 //Production Unit
 //    Route::resource('production','Production\ProductionUnitController');
     Route::resource('production-categories','Production\ProductionCategoryController');
-
     Route::resource('production-sliders','Production\ProductionSliderController');
-
     Route::resource('production-equipments','Production\ProductionEquipmentController');
     Route::resource('production-units','Production\ProductionUnitController');
 
@@ -36,7 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('equipment','EquimentController');
 
 // Compliance
-    Route::resource('compliance','ComplianceController');
+    Route::resource('compliances','ComplianceController');
 
 // Gallery Name
     Route::resource('gallery_name','GalleryCategoryController');
@@ -64,14 +62,12 @@ Route::post('contact', 'ContactController@send')->name('contact.send');
 Route::get('equipments', 'EquimentController@equipments')->name('equipments.all');
 Route::get('policy', 'PolicyController@policy')->name('policy.page');
 
-Route::get('production-unit/{slug}', 'Production\ProductionUnitController@productionUnit')->name('production-unit.slug');
+Route::get('production-unit/{slug}', 'Production\ProductionUnitController@productionUnit')->name('production.unit');
+Route::get('compliance/{slug}', 'ComplianceController@view')->name('compliance.view');
 
 
 Route::get('/photogallery', function (){
     return view('frontend.gallery');
-});
-Route::get('/printing', function (){
-    return view('frontend.production.printing');
 });
 Route::get('/products', function (){
     return view('frontend.products');

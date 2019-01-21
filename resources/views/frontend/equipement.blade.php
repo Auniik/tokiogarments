@@ -4,11 +4,11 @@
 <div class="single-banner">
 	<img src="{{ asset('/') }}frontend/images/banner/01.PNG">
 		<div class="banner-content">
-	         <h1>Equipment</h1>
+	         <h1>Equipments</h1>
 	         <ol class="banner-list">
 	            <li>Home</li>
 	            <li><i class="fa fa-angle-right"></i></li>
-	            <li><a href="#">Equipment</a></li>
+	            <li><a href="#">Equipments</a></li>
 	         </ol>
         </div>
 </div>
@@ -16,7 +16,7 @@
 	<div class="container">
 		<div class="row text-center">
            <div class="col-md-12">
-              <h2 class="section-title"><span>Our Equipment</span>Our Equipment</h2>
+              <h2 class="section-title"><span>Our Equipments</span>Our Equipments</h2>
            </div>
         </div>
 			<div class="row">

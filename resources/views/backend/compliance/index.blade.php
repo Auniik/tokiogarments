@@ -4,7 +4,7 @@
 @section('PageHead','All Compliance')
 @section('PageName','Tokio Garments Limited')
 @section('PageUrl')
-    <a href="{{ route('compliance.create') }}">Add Compliance</a>
+    <a href="{{ route('compliances.create') }}">Add Compliance</a>
 @endsection
 
 @section('content')
@@ -31,14 +31,15 @@
                         <td>{{ $i++ }}</td>
                         <td>{{ $compliance->title }}</td>
                         <td>
-                            @foreach(json_decode($compliance->compliance_image) as $image )
-                                print_r($image);
-                                @endforeach
+                            @php($images = json_decode($compliance->compliance_image))
+                            @foreach($images as $image)
+                                <img src="{{url($image)}}" alt="" width="70">
+                            @endforeach
                         </td>
                         <td>
                             <div class="btn-group">
-                                <a class="btn btn-primary  btn-sm" href="{{ route('compliance.edit',$compliance->id) }}"><i class="fa fa-edit"></i></a>
-                                <form action="{{ route('compliance.destroy',$compliance->id) }}" method="post">
+                                <a class="btn btn-warning btn-sm" href="{{ route('compliance.view',$compliance) }}"><i class="fa fa-eye"></i></a>
+                                <form action="{{ route('compliances.destroy',$compliance) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-danger  btn-sm" onclick=" return confirm('Are you Sure')" href="#"><i class="fa fa-trash"></i></button>

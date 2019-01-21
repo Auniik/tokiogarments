@@ -28,7 +28,7 @@
                         <td class="align-middle">{{ $i++ }}</td>
                         <td class="align-middle"><img class="img-fluid" width="100"  src="{{ url($slider->image) }}" alt=""></td>
                         <td class="align-middle">{{ $slider->productionUnit->name }}</td>
-                        <td class="align-middle">{{ $slider->status }}</td>
+                        <td class="align-middle">{!! status($slider->status) !!}</td>
                         <td class="align-middle">
                             <div class="btn-group">
                                 <a class="btn btn-primary btn-sm" href="{{ route('production-sliders.edit',$slider) }}"><i class="fa fa-edit"></i></a>

@@ -72,10 +72,9 @@
                         <td>{{ $i++ }}</td>
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->productionUnit->name }}</td>
-                        <td>{{ $category->status }}</td>
+                        <td>{!! status($category->status) !!}</td>
                         <td>
                             <div class="btn-group">
-                                {{--<a class="btn btn-warning btn-sm" href="{{ url(str_slug($category->name)) }}" target="_blank"><i class="fa fa-eye"></i></a>--}}
                                 <a class="btn btn-primary btn-sm" href="{{ route('production-categories.edit',$category) }}"><i class="fa fa-edit"></i></a>
                                 <form action="{{ route('production-categories.destroy',$category->id) }}" method="post">
                                     @csrf

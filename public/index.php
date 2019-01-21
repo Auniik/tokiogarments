@@ -23,6 +23,10 @@ define('LARAVEL_START', microtime(true));
 
 require __DIR__.'/../vendor/autoload.php';
 
+
+//loading helper file
+require_once __DIR__.'/../bootstrap/helpers.php';
+
 /*
 |--------------------------------------------------------------------------
 | Turn On The Lights

@@ -86,7 +86,7 @@
         <li><a class="app-menu__item {{ starts_with($path, 'client') ? 'active' : '' }}" href="{{ route('client.index') }}"><i class="app-menu__icon fa fa-thumbs-o-up"></i><span class="app-menu__label">Client</span></a></li>
         <li><a class="app-menu__item {{ starts_with($path,  'page') ? 'active' : '' }}" href="{{ route('page.index') }}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Page</span></a></li>
         <li><a class="app-menu__item {{ starts_with($path,  'equipment') ? 'active' : '' }}" href="{{ route('equipment.index') }}"><i class="app-menu__icon fa fa-cubes"></i><span class="app-menu__label">Equipment</span></a></li>
-        <li><a class="app-menu__item {{ starts_with($path,  'compliance') ? 'active' : '' }}" href="{{ route('compliance.index') }}"><i class="app-menu__icon fa fa-sitemap"></i><span class="app-menu__label">Compliance</span></a></li>
+        <li><a class="app-menu__item {{ starts_with($path,  'compliances') ? 'active' : '' }}" href="{{ route('compliances.index') }}"><i class="app-menu__icon fa fa-sitemap"></i><span class="app-menu__label">Compliance</span></a></li>
         <li class="treeview"><a class="app-menu__item " href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-picture-o"></i><span class="app-menu__label">Photo Gallery</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item {{ starts_with($path,  'gallery_name') ? 'active' : '' }}" href="{{ route('gallery_name.index') }}"><i class="icon fa fa-circle-o"></i> Photo Category</a></li>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RenameFieldInPagesTable extends Migration
+class AddFieldInCompliancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class RenameFieldInPagesTable extends Migration
      */
     public function up()
     {
-        Schema::table('pages', function (Blueprint $table) {
-            $table->renameColumn('discription', 'description');
+        Schema::table('compliances', function (Blueprint $table) {
+            $table->string('slug');
         });
     }
 
@@ -25,8 +25,8 @@ class RenameFieldInPagesTable extends Migration
      */
     public function down()
     {
-        Schema::table('pages', function (Blueprint $table) {
-            $table->renameColumn('description', 'discription');
+        Schema::table('compliances', function (Blueprint $table) {
+            $table->dropColumn('slug');
         });
     }
 }

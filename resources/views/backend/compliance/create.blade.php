@@ -4,7 +4,7 @@
 @section('PageHead','Add Compliance')
 @section('PageName','Tokio Garments Limited')
 @section('PageUrl')
-    <a href="{{ route('compliance.index') }}">All Compliance</a>
+    <a href="{{ route('compliances.index') }}">All Compliance</a>
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
     <div class="col-md-8">
         <div class="tile">
             <div class="tile-body">
-                <form action="{{ route('compliance.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('compliances.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
 
                     @if( session()->has('success') )
@@ -54,8 +54,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Discription</label>
-                        <textarea name="discription" id="trumbowyg-demo" cols="30" rows="10"></textarea>
+                        <label class="form-label">Description</label>
+                        <textarea name="description" id="trumbowyg-demo" cols="30" rows="10"></textarea>
                     </div>
 
 

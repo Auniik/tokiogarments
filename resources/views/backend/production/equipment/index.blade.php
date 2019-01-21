@@ -86,7 +86,7 @@
                         <td>{{ $equipment->item }}</td>
                         <td>{{ $equipment->quantity }}</td>
                         <td>{{ $equipment->productionUnit->name }}</td>
-                        <td>{{ $equipment->status }}</td>
+                        <td>{!! status($equipment->status) !!}</td>
                         <td>
                             <div class="btn-group">
                                 <a class="btn btn-primary btn-sm" href="{{ route('production-equipments.edit',$equipment) }}"><i class="fa fa-edit"></i></a>

@@ -4,7 +4,7 @@
 @section('PageHead', 'Edit Compliance')
 @section('PageName', 'Tokio Garments Limited')
 @section('PageUrl')
-    <a href="{{ route('compliance.edit') }}">All Compliance</a>
+    <a href="{{ route('compliances.edit') }}">All Compliance</a>
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
     <div class="col-md-8">
         <div class="tile">
             <div class="tile-body">
-                <form action="{{ route('compliance.update') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('compliances.update') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('patch')
                     @if( session()->has('success') )
@@ -54,8 +54,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Discription</label>
-                        <textarea name="discription" id="trumbowyg-demo" cols="30" rows="10"></textarea>
+                        <label class="form-label">Description</label>
+                        <textarea name="description" id="trumbowyg-demo" cols="30" rows="10"></textarea>
                     </div>
 
 

@@ -14,15 +14,20 @@ class ProductionUnitController extends Controller
     public function productionUnit(ProductionUnit $slug)
     {
         if ($slug->slug){
-            $equipments = ProductionEquipment::where([['production_unit_id', $slug->id],['status',1]])->get();
-            $categories = ProductionCategory::where([['production_unit_id', $slug->id],['status',1]])->get()->split(3);
+            $equipments = ProductionEquipment::where([['production_unit_id', $slug->id],['status',1]])
+                                            ->get();
+
+            $categories = ProductionCategory::orderBy('created_at', 'desc')
+                                            ->where([['production_unit_id', $slug->id],['status',1]])
+                                            ->get()
+                                            ->split(3);
+
             $categories = $categories->reverse();
-            $images = ProductionSlider::where([['production_unit_id', $slug->id],['status',1]])->get();
+
+            $images = ProductionSlider::where([['production_unit_id', $slug->id],['status',1]])
+                                        ->get();
 
             return view('frontend.production-unit', compact('slug', 'equipments', 'categories', 'images'));
-        }
-        else{
-            return redirect('contact');
         }
 
 
@@ -119,7 +124,7 @@ class ProductionUnitController extends Controller
         $data['image_details'] = $request->image_details;
         $data['status'] = $request->status;
         $productionUnit->update($data);
-        return back()->withSuccess('Production unit updated successfully');
+        return redirect('production-units')->withSuccess('Production unit updated successfully');
     }
 
     /**

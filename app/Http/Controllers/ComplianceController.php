@@ -4,9 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Model\Compliance;
 use Illuminate\Http\Request;
+use Storage;
 
 class ComplianceController extends Controller
 {
+
+    public function view(Compliance $slug)
+    {
+        if ($slug->slug){
+            dd($slug);
+            return view('fontend.compliance', compact('slug'));
+        }
+
+
+    }
     // compliance
     public function index()
     {
@@ -23,31 +34,34 @@ class ComplianceController extends Controller
     }
 
     // store compliance
+
+    /**
+     * @param Request $request
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required',
-            'compliance_image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'title' => 'required|unique:compliances',
+            'compliance_image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
         if($request->hasfile('compliance_image'))
         {
-
+            $data = array();
             foreach($request->file('compliance_image') as $image)
             {
-                $name = $image->getClientOriginalName();
-                $image->move(public_path().'/backend/images/compliance', $name);
-                $data[] = $name;
+                $path = $image->store(file_path('images/compliance'));
+                array_push($data, $path);
             }
         }
-
         $compliance = new Compliance();
         $compliance->compliance_image = json_encode($data);
         $compliance['title'] = $request->title;
-        $compliance['discription'] = $request->discription;
-
-
+        $compliance['slug'] = str_slug($request->title);
+        $compliance['description'] = $request->description;
         $compliance->save();
+
+        return back()->withSuccess('Complience Added');
 
 
     }
@@ -92,7 +106,14 @@ class ComplianceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy(Compliance $compliance)
     {
+
+        foreach (json_decode($compliance->compliance_image) as $image){
+            Storage::delete($image);
+        }
+        $compliance->delete();
+
+        return back()->with('success','Successfully Deleted');
     }
 }

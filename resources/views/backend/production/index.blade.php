@@ -101,11 +101,12 @@
                         <td>{{ $unit->space }}</td>
                         <td>{{ $unit->capacity }}</td>
                         <td>{{ $unit->image_details }}</td>
-                        <td>{{ $unit->status }}</td>
+                        <td>{!! status($unit->status) !!}</td>
                         <td>
                             <div class="btn-group">
-                                <a class="btn btn-primary btn-sm" href="{{ route('production-units.edit',$unit) }}"><i class="fa fa-edit"></i></a>
-                                <form action="{{ route('production-units.destroy',$unit) }}" method="post">
+                                <a class="btn btn-warning btn-sm" href="{{ route('production.unit', $unit->slug) }}"><i class="fa fa-eye"></i></a>
+                                <a class="btn btn-primary btn-sm" href="{{ route('production-units.edit', $unit) }}"><i class="fa fa-edit"></i></a>
+                                <form action="{{ route('production-units.destroy', $unit) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick=" return confirm('Are you Sure')" href="#"><i class="fa fa-trash"></i></button>

@@ -21,7 +21,7 @@
                     <div class="item-content">
                         <h2>Our {{$slug->name}} Section</h2>
                         <p><strong>Floor Space :</strong> {{$slug->space}}</p>
-                        <p><strong>Capacity :</strong> Approx. Capacity : {{$slug->capacity}}</p>
+                        <p><strong>Approx. Capacity :</strong> {{$slug->capacity}}</p>
                         @if ($categories->count() != null)
                             <p class="printing-equi text-center">
                                 <span> <strong>:: Producing Categories ::</strong></span>
@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="col-md-5">
-
+                    @if ($images->count() != null)
                     <div class="feature-item">
                         <div id="owl-demo" class="owl-carousel owl-theme">
                             @foreach($images as $image)
@@ -69,6 +69,7 @@
                         </div>
                         <h2><strong>Image: </strong> {{$slug->image_details}}</h2>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
