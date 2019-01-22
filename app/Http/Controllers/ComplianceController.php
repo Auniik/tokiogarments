@@ -12,8 +12,7 @@ class ComplianceController extends Controller
     public function view(Compliance $slug)
     {
         if ($slug->slug){
-            dd($slug);
-            return view('fontend.compliance', compact('slug'));
+            return view('frontend.compliance', compact('slug'));
         }
 
 
@@ -41,10 +40,18 @@ class ComplianceController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        //Validation
+        $request->validate([
             'title' => 'required|unique:compliances',
-            'compliance_image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'homage' => 'required',
+            'compliance_image.*' => 'required|image',
+            'pdf_document' => 'mimes:pdf',
         ]);
+
+        //Created New Instance
+        $compliance = new Compliance();
+
+        //Image Upload
         if($request->hasfile('compliance_image'))
         {
             $data = array();
@@ -54,11 +61,19 @@ class ComplianceController extends Controller
                 array_push($data, $path);
             }
         }
-        $compliance = new Compliance();
+
+        //Pdf Upload
+        if ($request->hasFile('pdf_document')){
+            $compliance['pdf_document'] = $request->file('pdf_document')->store(file_path('pdf/compliance'));
+        }
+
+        //Insert Image
         $compliance->compliance_image = json_encode($data);
+
         $compliance['title'] = $request->title;
         $compliance['slug'] = str_slug($request->title);
         $compliance['description'] = $request->description;
+        $compliance['homage'] = $request->homage;
         $compliance->save();
 
         return back()->withSuccess('Complience Added');
@@ -69,7 +84,7 @@ class ComplianceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Compliance $compliance
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -80,12 +95,12 @@ class ComplianceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Compliance $compliance
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Compliance $compliance)
     {
-        //
+        return view('backend.compliance.edit', compact('compliance'));
     }
 
     /**
@@ -95,9 +110,43 @@ class ComplianceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Compliance $compliance)
     {
-        //
+        $request->validate([
+            'title' => 'required|unique:compliances,title,'.$compliance->id,
+            'homage' => 'required',
+            'compliance_image.*' => 'required|image',
+        ]);
+        if($request->hasfile('compliance_image'))
+        {
+            $data = array();
+            foreach($request->file('compliance_image') as $image)
+            {
+                $path = $image->store(file_path('images/compliance'));
+                array_push($data, $path);
+            }
+
+            foreach (json_decode($compliance->compliance_image) as $image){
+                Storage::delete($image);
+            }
+            $compliance->update([$compliance->compliance_image = json_encode($data)]);
+        }
+
+        if ($request->hasFile('pdf_document')){
+            $compliance['pdf_document'] = $request->file('pdf_document')->storeAs(file_path('pdf/compliance'), $compliance->pdf_document);
+        }
+
+        $compliance->update([
+            $compliance['compliance_image'] = $compliance->compliance_image,
+            $compliance['title'] = $request->title,
+            $compliance['slug'] = str_slug($request->title),
+            $compliance['description'] = $request->description,
+            $compliance['homage'] = $request->homage,
+        ]);
+
+
+        return redirect('compliances')->withSuccess('Complience Updated');
+
     }
 
     /**

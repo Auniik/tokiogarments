@@ -45,22 +45,40 @@
 
                     </div>
 
+                    <hr>
+
+                    <div class="form-group">
+                        <label class="control-label">PDF Document</label>
+                        <input class="form-control" type="file" name="pdf_document">
+                        @if($errors->has('pdf_document'))
+                            <strong class="text-danger">{{ $errors->first('pdf_document') }}</strong>
+                        @endif
+                        <div class="text-primary">Note: If you want to upload compliance as pdf then select pdf from here.</div>
+                    </div>
+
                     <div class="form-group">
                         <label class="control-label">Compliance Name</label>
-                        <input type="text" class="form-control" name="title" placeholder="Compliance Name">
+                        <input type="text" value="{{old('title')}}" class="form-control" name="title" placeholder="Enter Compliance Name">
                         @if($errors->has('title'))
                             <strong class="text-danger">{{ $errors->first('title') }}</strong>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Homage / Certificate Name</label>
+                        <input type="text" value="{{old('homage')}}" class="form-control" name="homage" placeholder="Enter Homage / Certificate Name">
+                        @if($errors->has('homage'))
+                            <strong class="text-danger">{{ $errors->first('homage') }}</strong>
                         @endif
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Description</label>
-                        <textarea name="description" id="trumbowyg-demo" cols="30" rows="10"></textarea>
+                        <textarea name="description" id="trumbowyg-demo" cols="30" rows="10">{{old('description')}}</textarea>
                     </div>
 
 
                     <div class="tile-footer">
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Submit</button>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add Compliance</button>
                     </div>
                 </form>
             </div>

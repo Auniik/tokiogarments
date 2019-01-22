@@ -1,36 +1,58 @@
 @extends('frontend._partial.app')
-@section('title', 'Cutting')
+@section('title', $slug->title)
 @section('body')
     <div class="single-banner">
         <img src="{{ asset('/') }}frontend/images/banner/01.PNG">
         <div class="banner-content">
-            <h1>Cutting</h1>
+            <h1>{{$slug->title}}</h1>
+            <h3>{{$slug->homage}}</h3>
             <ol class="banner-list">
                 <li>Home</li>
                 <li><i class="fa fa-angle-right"></i></li>
-                <li><a href="#">cutting</a></li>
+                <li><a href="#">{{$slug->title}}</a></li>
             </ol>
         </div>
     </div>
     <div class="item-discription section-padding ">
         <div class="container">
             <div class="row">
-                <div class="col-lg-7">
-                    <div class="item-content">
-                        <h2>Our Cutting Facility</h2>
-                        <p><strong>Flooar Space :</strong>10,000 Square Feet</p>
-                        <p><strong>Capacity :</strong>15,000 Pcs / Day</p>
-                        <p>We produce almost all kinds of knitwear items like t-shirt, polo-shirt, tank-top, jacket, cardigan, sweat-shirt, trouser, shorts etc. of ladies, men’s, boys, girls & kids including fancy items with print, embroidery, stone, beads, sequins etc. We’re exporting our garments to European countries specially in Germany. Our most honorable prime buyers are H. Obermeyer GmbH & Co., Metro Group & AEON. We’re also working for Ernsting’s Family, Tornado, Babyshop, Intersports & C-Toys through agents.</p>
-                        <p>We’ve all the facilities & supports in well organized form to manufacturer 10-12 lines garments which sum up production capacity 250,000 pcs approx. per month. To ensure good quality & customer’s satisfaction we’ve achieved Oekotex Standard 100 Product Class 1. Also we’re working for Social Compliance to optimize synchronization of the products. We will take pleasure if you are interested & let us know your requirements so that we could offer you a better service with competitive price.</p>
+                <div class="{{$slug->description==null ? 'col-lg-12' : 'col-lg-7 col-md-7'}}">
+                    <div class="feature-item col-lg-12">
+                        @php($images = json_decode($slug->compliance_image))
+                        <div class="{{$slug->description==null ? 'div-count' : ''}}">
+                        @foreach($images as $image)
+                            <div class="{{$slug->description==null ? 'col-lg-12': ''}}">
+                                <img class="img-thumbnail" src="{{url($image)}}" alt="">
+                            </div>
+                        @endforeach
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-5">
-                    <div class="feature-item">
-                        <img src="{{ asset('/') }}frontend/images/category/01.jpg">
-                        <h2><strong>Image:</strong>Our Cuting Room</h2>
+                @if ($slug->description)
+                    <div class="col-lg-5 col-md-5">
+                        <div class="item-content">
+                            <hr>
+                                <h2>{{$slug->homage}}</h2>
+                            <hr>
+                            <p>{!!$slug->description!!}</p>
+                        </div>
+
                     </div>
-                </div>
+                @endif
+
             </div>
+
+            @if ($slug->pdf_document)
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="{{url($slug->pdf_document)}}" height="300" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
         </div>
+
     </div>
 @endsection

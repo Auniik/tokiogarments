@@ -1,26 +1,33 @@
 @extends('backend._partial.dashboard')
 
-@section('title', 'Edit Compliance')
-@section('PageHead', 'Edit Compliance')
-@section('PageName', 'Tokio Garments Limited')
+@section('title','Edit Compliance')
+@section('PageHead','Edit Compliance')
+@section('PageName','Tokio Garments Limited')
 @section('PageUrl')
-    <a href="{{ route('compliances.edit') }}">All Compliance</a>
+    <a href="{{ route('compliances.index') }}">All Compliance</a>
 @endsection
 
 @section('content')
 
-    <div class="col-md-8">
+    <div class="col-md-11">
         <div class="tile">
             <div class="tile-body">
-                <form action="{{ route('compliances.update') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('compliances.update', $compliance) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('patch')
+
                     @if( session()->has('success') )
-                        <div class="alert alert-success">{{ Session::get('success') }}</div><br>
+                        <div class="alert alert-success">{{ Session::get('success') }}</div>
                     @endif
+                    <div class="div-count">
+                        @foreach(json_decode($compliance->compliance_image) as $image)
+                            <div class="col-md-12">
+                                <img class="small-img img-thumbnail pull-left" style="" src="{{url($image)}}" alt="">
+                            </div>
+                        @endforeach
+                    </div>
 
                     <div class="form-group">
-                        <label class="control-label">Compliance Image</label>
 
                         <div class="input-group control-group increment">
                             <input type="file" name="compliance_image[]" class="form-control">
@@ -44,18 +51,40 @@
                         </div>
 
                     </div>
+                    @if ($compliance->pdf_document)
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="{{url($compliance->pdf_document)}}" height="300" allowfullscreen></iframe>
+                        </div>
+                        {{--<iframe src="{{url($compliance->pdf_document)}}" frameborder="" height="auto" width="auto" ></iframe>--}}
+                    @endif
+                    <div class="form-group">
+
+                        <label class="control-label">PDF Document</label>
+                        <input class="form-control" type="file" name="pdf_document">
+                        @if($errors->has('pdf_document'))
+                            <strong class="text-danger">{{ $errors->first('pdf_document') }}</strong>
+                        @endif
+                        <div class="text-primary">Note: If you want to upload compliance as pdf then select pdf from here.</div>
+                    </div>
 
                     <div class="form-group">
                         <label class="control-label">Compliance Name</label>
-                        <input type="text" class="form-control" name="title" placeholder="Compliance Name">
+                        <input type="text" value="{{$compliance->title}}" class="form-control" name="title" placeholder="Enter Compliance Name">
                         @if($errors->has('title'))
                             <strong class="text-danger">{{ $errors->first('title') }}</strong>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Homage / Certificate Name</label>
+                        <input type="text" value="{{$compliance->homage}}" class="form-control" name="homage" placeholder="Enter Homage / Certificate Name">
+                        @if($errors->has('homage'))
+                            <strong class="text-danger">{{ $errors->first('homage') }}</strong>
                         @endif
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Description</label>
-                        <textarea name="description" id="trumbowyg-demo" cols="30" rows="10"></textarea>
+                        <textarea name="description" id="trumbowyg-demo" cols="30" rows="10">{{$compliance->description}}</textarea>
                     </div>
 
 

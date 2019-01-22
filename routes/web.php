@@ -65,6 +65,9 @@ Route::get('policy', 'PolicyController@policy')->name('policy.page');
 Route::get('production-unit/{slug}', 'Production\ProductionUnitController@productionUnit')->name('production.unit');
 Route::get('compliance/{slug}', 'ComplianceController@view')->name('compliance.view');
 
+//Route::get('/compliance', function (){
+//    return view('frontend.compliance ');
+//});
 
 Route::get('/photogallery', function (){
     return view('frontend.gallery');

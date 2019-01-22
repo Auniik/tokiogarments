@@ -1289,6 +1289,9 @@ ul.top-menu li a:hover {
   }
 }
 @media screen and (max-width: 767px) {
+    .div-count{
+        column-count: 1!important;
+    }
   .header-standard .container {
     max-width: 100%;
     padding: 0;
@@ -1851,11 +1854,13 @@ ul.navbar-nav > li > a i {
 }
 
 @media (min-width: 768px) {
+
   ul.nav li.dropdown:hover ul.dropdown-menu {
     display: block;
   }
 }
 @media (min-width: 767px) {
+
   ul.nav li.dropdown ul.dropdown-menu li.dropdown-submenu .dropdown-menu {
     left: 100%;
     top: 0;
@@ -6164,7 +6169,10 @@ label {
 .banner-content h1{
   color: #fff;
 }
-
+.banner-content h3{
+    text-align: center;
+    color: #e5e5e5;
+}
 .feature-item img{
   width: 100%;
   margin-top: 20px;
@@ -6179,6 +6187,12 @@ label {
 }
 .item-content p{
   text-align: justify;
+}
+.item-content h2{
+    text-align: center;
+}
+.item-content hr{
+    margin: 22px 0;
 }
 
 
@@ -6286,6 +6300,10 @@ a .fa-tumblr:hover{
 }
 a .fa-vine:hover{
     background: #00b488;
+}
+
+.div-count{
+    column-count: 2;
 }
 
 

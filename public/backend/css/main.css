@@ -8181,6 +8181,7 @@ button.bg-dark:focus {
 }
 
 @media (min-width: 576px) {
+
   .m-sm-0 {
     margin: 0 !important;
   }
@@ -13814,6 +13815,9 @@ be a descendant of the grid when it is being dragged.
 }
 
 @media (max-width: 767px) {
+    .div-count{
+        column-count: 2!important;
+    }
   .app-sidebar__overlay {
     position: fixed;
     top: 0;
@@ -13961,6 +13965,7 @@ be a descendant of the grid when it is being dragged.
 }
 
 @media (min-width: 768px) {
+
   .sidebar-mini.sidenav-toggled .app-sidebar__user-name,
   .sidebar-mini.sidenav-toggled .app-sidebar__user-designation,
   .sidebar-mini.sidenav-toggled .treeview-indicator {
@@ -14108,7 +14113,11 @@ be a descendant of the grid when it is being dragged.
 }
 
 @media (max-width: 480px) {
-  .app-title {
+    .div-count{
+        column-count: 1;
+    }
+
+    .app-title {
     margin: -15px -15px 15px;
     padding: 20px;
     -webkit-box-orient: vertical;
@@ -15264,4 +15273,13 @@ be a descendant of the grid when it is being dragged.
   height: 45px;
   width: 45px;
   font-size: 20px;
+}
+
+.div-count{
+    column-count: 3;
+}
+@media (max-width: 577px) {
+    .div-count{
+        column-count: 1!important;
+    }
 }
