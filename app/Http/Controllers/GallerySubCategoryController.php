@@ -15,12 +15,9 @@ class GallerySubCategoryController extends Controller
      */
     public function index($id)
     {
-        $id = $id;
-        $galleries = PhotoSubCategory::all();
-        return view('backend.photo_gallery.subcategory.index',[
-            'galleries' => $galleries,
-            'id' => $id,
-        ]);
+        $galleries = PhotoSubCategory::where('category_id', $id)->get();
+//        dd($galleries->category);
+        return view('backend.photo_gallery.subcategory.index', compact('galleries','id'));
     }
 
     // store data
@@ -30,7 +27,7 @@ class GallerySubCategoryController extends Controller
         $subcategory['sub_category_name'] = $request->name;
         $subcategory['category_id'] = $request->category_id;
         $subcategory->save();
-        return back()->with('success','Successfully Inserted');
+        return back()->withSuccess('Subcategory Added Successfully');
     }
 
 
@@ -47,13 +44,13 @@ class GallerySubCategoryController extends Controller
         $subcategory['sub_category_name'] = $request->name;
         $subcategory['category_id'] = $request->category_id;
         $subcategory->save();
-        return back()->with('update','Successfully Updated');
+        return back()->withSuccess('Successfully Updated');
     }
 
 
     public function destroy($id)
     {
         PhotoSubCategory::find($id)->delete();
-        return back()->with('delete','Successfully Inserted');
+        return back()->withSuccess('Subcategory Deleted Successfully.');
     }
 }

@@ -51,11 +51,10 @@
                         </div>
 
                     </div>
-                    @if ($compliance->pdf_document)
-                        <div class="embed-responsive embed-responsive-16by9">
+                    @if ($compliance->pdf_document!=null)
+                        <div class="embed-responsive embed-responsive-21by9">
                             <iframe class="embed-responsive-item" src="{{url($compliance->pdf_document)}}" height="300" allowfullscreen></iframe>
                         </div>
-                        {{--<iframe src="{{url($compliance->pdf_document)}}" frameborder="" height="auto" width="auto" ></iframe>--}}
                     @endif
                     <div class="form-group">
 

@@ -33,7 +33,7 @@
 
                     <div class="form-group">
                         <label class="control-label">Phone</label>
-                        <input class="form-control" type="phone" name="phone" value="{{ $config->phone }}">
+                        <input class="form-control" type="text" name="phone" value="{{ $config->phone }}">
                     </div>
 
                     <div class="form-group">

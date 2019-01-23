@@ -1,10 +1,10 @@
 @extends('backend._partial.dashboard')
 
-@section('title','Edit Slider')
-@section('PageHead','Edit Slider')
+@section('title','Edit Slider Image')
+@section('PageHead','Edit Slider Image')
 @section('PageName','Tokio Garments Limited')
 @section('PageUrl')
-    <a href="{{ route('slider.index') }}">All Slider</a>
+    <a href="{{ route('slider.index') }}">Slider</a>
 @endsection
 
 @section('content')
@@ -17,14 +17,14 @@
                     @method('patch')
 
                     @if( session()->has('success') )
-                        <div class="alert alert-success">{{ Session::get('success') }}</div><br>
+                        <div class="alert alert-success">{{ Session::get('success') }}</div>
                     @endif
 
                     <div class="form-group">
                         <label class="control-label">Slider Image</label>
                         <input class="form-control" type="file" name="slider_image">
                         <img class="large-img" src="{{ url($slider->slider_image) }}">
-                        <div class="help">[ image size width = 1920 pixels x height = 450 pixels ]</div>
+                        <div class="text-secondary">Note: image size width = 1600 pixels x height = 800 pixels</div>
                     </div>
 
 

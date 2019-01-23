@@ -133,15 +133,16 @@ class ComplianceController extends Controller
         }
 
         if ($request->hasFile('pdf_document')){
-            $compliance['pdf_document'] = $request->file('pdf_document')->storeAs(file_path('pdf/compliance'), $compliance->pdf_document);
+            unlink($compliance->pdf_document);
+            $compliance->update(['pdf_document' => $request->file('pdf_document')->store(file_path('pdf/compliance'))]);
         }
 
         $compliance->update([
-            $compliance['compliance_image'] = $compliance->compliance_image,
-            $compliance['title'] = $request->title,
-            $compliance['slug'] = str_slug($request->title),
-            $compliance['description'] = $request->description,
-            $compliance['homage'] = $request->homage,
+            'compliance_image' => $compliance->compliance_image,
+            'title'=> $request->title,
+            'slug' => str_slug($request->title),
+            'description' => $request->description,
+            'homage' => $request->homage,
         ]);
 
 
@@ -152,7 +153,7 @@ class ComplianceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Compliance $compliance
      * @return \Illuminate\Http\Response
      */
     public function destroy(Compliance $compliance)

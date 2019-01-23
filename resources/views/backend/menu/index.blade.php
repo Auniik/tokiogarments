@@ -20,7 +20,6 @@
                 <tr>
                     <th>Sl</th>
                     <th>Name</th>
-                    <th>Parent</th>
                     <th>Slug</th>
                     <th>Action</th>
                 </tr>

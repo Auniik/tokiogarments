@@ -1,12 +1,15 @@
 <?php
 
-namespace App\model;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
 class PhotoSubCategory extends Model
 {
-    public function categories(){
-        return $this->belongsTo('App\model\PhotoCategory');
+    protected $fillable = [
+        'category_id', 'sub_category_name'
+    ];
+    public function category(){
+        return $this->belongsTo(PhotoCategory::class);
     }
 }

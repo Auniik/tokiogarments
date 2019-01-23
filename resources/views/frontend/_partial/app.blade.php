@@ -59,7 +59,7 @@
                            <li><span class="info-icon"><i class="icon icon-phone3"></i></span>
                               <div class="info-wrapper">
                                  <p class="info-title">24/7 Response Time</p>
-                                 <p class="info-subtitle">asdfsdf</p>
+                                 <p class="info-subtitle">{{$basic->phone}}</p>
                               </div>
                            </li>
                            <li><span class="info-icon"><i class="icon icon-envelope"></i></span>
@@ -77,40 +77,7 @@
                </div>
             </div>
             <!-- Container end-->
-            <div class="site-nav-inner site-navigation navigation navdown">
-               <div class="container">
-                  <nav class="navbar navbar-expand-lg ">
-                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"><i class="icon icon-menu"></i></span></button>
-                     <!-- End of Navbar toggler-->
-                     <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
-
-                        <ul class="navbar-nav">
-                           {{--@foreach($menus as $menu)--}}
-{{--                                 <li class="nav-item dropdown"><a class="nav-link" href="{{ URL::to($menu->page_url) }}" data-toggle="dropdown">{{ $menu->page_name }}</a>--}}
-                                       <ul class="dropdown-menu" role="menu">
-                                          <?php
-//                                          $submenus=DB::table('submenus')->where('fk_menu_id',$menu->id)->get();
-                                          ?>
-{{--                                          @foreach($submenus as $submenu)--}}
-                                          {{--<li><a href="{{ URL::to($submenu->page_url) }}">{{ $submenu->menu_name }}</a></li>--}}
-                                          {{--@endforeach--}}
-                                       </ul>
-                                 </li>
-                           {{--@endforeach--}}
-
-
-                        </ul>
-                        <!--Nav ul end-->
-                     </div>
-
-                  </nav>
-                  <!-- Collapse end-->
-
-
-
-               </div>
-            </div>
+            @include('frontend._partial.nav')
             <!-- Site nav inner end-->
          </header>
          <!-- Header end-->
@@ -144,7 +111,7 @@
                      <div class="ts-contact-info"><span class="ts-contact-icon float-left"><i class="icon icon-phone3"></i></span>
                         <div class="ts-contact-content">
                            <h3 class="ts-contact-title">Phone Number</h3>
-                           <p>4545</p>
+                           <p>{{ $basic->phone }}</p>
                         </div>
                         <!-- Contact content end-->
                      </div>
@@ -157,6 +124,20 @@
                      {{--</div>--}}
                   </div>
                    <!-- About us end-->
+                   <div class="col-lg-4 col-md-6 footer-widget">
+                       <h3 class="widget-title">Quick Links</h3>
+                       <ul class="list-dash">
+                           <li><a href="#">About Us</a></li>
+                           <li><a href="#">Founder CEO</a></li>
+                           <li><a href="#">Policy</a></li>
+                           <li><a href="#">Licence/Reg</a></li>
+                           <li><a href="#">Inspections</a></li>
+                           <li><a href="#">Buyers</a></li>
+                           <li><a href="#">Contact Us</a></li>
+                           <li><a href="#">Bank Details</a></li>
+                       </ul>
+                   </div>
+
                   <div class="col-lg-4 col-md-6 footer-widget">
                      <h3 class="widget-title">Facebook Page</h3>
                      <div class="fb-page" data-href="{{$basic->facebook_page}}" data-tabs="timeline" data-width="350" data-height="250" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="{{$basic->facebook_page}}" class="fb-xfbml-parse-ignore"><a href="{{$basic->facebook_page}}">{{$basic->title}}</a></blockquote></div>

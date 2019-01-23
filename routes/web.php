@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('compliances','ComplianceController');
 
 // Gallery Name
-    Route::resource('gallery_name','GalleryCategoryController');
+    Route::resource('gallery-categories','GalleryCategoryController');
     Route::get('sub_category_name/{id}','GallerySubCategoryController@index');
     Route::resource('sub_category_name','GallerySubCategoryController');
     Route::resource('gallery', 'ImageGalleryController');
@@ -81,3 +81,4 @@ Route::get('/singlepost', function (){
 Route::get('/singleproduct', function (){
     return view('frontend.single-product');
 });
+Route::get('/', 'MainPageController@index')->name('index');

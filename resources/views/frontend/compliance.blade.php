@@ -36,18 +36,19 @@
                             <hr>
                             <p>{!!$slug->description!!}</p>
                         </div>
-
                     </div>
                 @endif
 
             </div>
 
             @if ($slug->pdf_document)
+                <br>
+                <div class="embed-responsive embed-responsive-21by9">
+                    <iframe class="embed-responsive-item" src="{{url($slug->pdf_document)}}" ></iframe>
+                </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="{{url($slug->pdf_document)}}" height="300" allowfullscreen></iframe>
-                        </div>
+
                     </div>
                 </div>
             @endif

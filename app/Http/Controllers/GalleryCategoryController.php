@@ -19,9 +19,8 @@ class GalleryCategoryController extends Controller
     {
         $category = new PhotoCategory();
         $category['category_name'] = $request->gallery_name;
-
         $category->save();
-        return back()->with('success','Successfully Inserted');
+        return back()->withSuccess('Photo Galerry Added Successfully.');
     }
 
     public function edit($id)
@@ -38,7 +37,7 @@ class GalleryCategoryController extends Controller
         $category['category_name'] = $request->gallery_name;
 
         $category->save();
-        return back()->with('update','Successfully Updated');
+        return back()->withSuccess('Successfully Updated');
     }
 
 

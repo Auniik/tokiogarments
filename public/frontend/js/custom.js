@@ -302,7 +302,7 @@ jQuery(function ($) {
       touchDrag: true,
       smartSpeed: 900,
       navText: ["<i class='icon icon-left-arrow2'></i>", "<i class='icon icon-right-arrow2'></i>"],
-      items: 5,
+      items: 1,
       responsive: {
          0: {
             items: 2,
@@ -333,7 +333,7 @@ jQuery(function ($) {
       touchDrag: true,
       smartSpeed: 800,
       navText: ["<i class='icon icon-left-arrow2'></i>", "<i class='icon icon-right-arrow2'></i>"],
-      items: 1,
+      items: 5,
       responsive: {
          0: {
             items: 1,
@@ -386,21 +386,21 @@ jQuery(function ($) {
    /* ----------------------------------------------------------- */
    /*  Images popup
    /* ----------------------------------------------------------- */
-   $(document).ready(function () {
-
-      $(".gallery-popup").colorbox({
-         rel: 'gallery-popup',
-         transition: "fade",
-         innerHeight: "500"
-      });
-
-      $(".popup").colorbox({
-         iframe: true,
-         innerWidth: 600,
-         innerHeight: 400
-      });
-
-   });
+   // $(document).ready(function () {
+   //
+   //    $(".gallery-popup").colorbox({
+   //       rel: 'gallery-popup',
+   //       transition: "fade",
+   //       innerHeight: "500"
+   //    });
+   //
+   //    $(".popup").colorbox({
+   //       iframe: true,
+   //       innerWidth: 600,
+   //       innerHeight: 400
+   //    });
+   //
+   // });
 
 
 

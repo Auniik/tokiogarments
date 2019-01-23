@@ -1,7 +1,7 @@
 @extends('backend._partial.dashboard')
 
-@section('title','Add Photo Sub Gallery')
-@section('PageHead','Add photo Sub Gallery')
+@section('title','Edit Photo Sub Gallery')
+@section('PageHead','Edit Photo Sub Gallery')
 @section('PageName','Tokio Garments Limited')
 
 @section('PageUrl')
@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="tile-footer">
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add Now</button>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save Changes</button>
                     </div>
                 </form>
             </div>

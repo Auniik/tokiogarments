@@ -28,22 +28,18 @@ class SliderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'slider_image' => 'required|mimes:jpeg,bmp,png,svg,jpg|max:2048'
+            'slider_image' => 'required|image|max:2048'
         ]);
 
-        $image=$request->file('slider_image');
-
-        $extension=$image->getClientOriginalExtension();
-        $fileName=rand(1,1000).".".$extension;
-
-        $img=Image::make($image)->resize(1920,450);
-        $img->save('backend/images/sliders'.$fileName);
-        $input['slider_image']='backend/images/sliders'.$fileName;
+        $image = $request->file('slider_image');
+        Storage::makeDirectory($path = file_path('images/slider_images/'));
+        $image_path = $path.$image->hashName();
+        Image::make($image)->resize(1600,800)->save($image_path);
 
         Slider::create([
-            'slider_image' => $input['slider_image'],
+            'slider_image' => $image_path
         ]);
-        return back()->with('success','Slider Successfully Inserted');
+        return back()->withSuccess('Image for Slider Successfully Added');
 
     }
 
@@ -56,29 +52,21 @@ class SliderController extends Controller
         ]);
     }
     // update data
-    public function update(Request $request, $id)
+    public function update(Request $request,Slider $slider)
     {
         $request->validate([
-            'slider_image' => 'max:2048'
+            'slider_image' => 'image'
         ]);
 
-        $slider = Slider::find($id);
-
-        Storage::delete($slider->slider_image);
-
-        $image=$request->file('slider_image');
-
-        $extension=$image->getClientOriginalExtension();
-        $fileName=rand(1,1000).".".$extension;
-
-        $img=Image::make($image)->resize(1920,450);
-        $img->save('backend/images/sliders'.$fileName);
-        $input['slider_image']='backend/images/sliders'.$fileName;
-
-        Slider::find($id)->update([
-            'slider_image' => $input['slider_image'],
-        ]);
-        return back()->with('success','Slider Successfully Updated');
+        if ($request->hasFile('slider_image')){
+            Storage::delete($slider->image);
+            $image = $request->file('slider_image');
+            Storage::makeDirectory($path = file_path('images/slider_images/'));
+            $image_path = $path.$image->hashName();
+            Image::make($image)->resize(1600, 800)->save($image_path);
+            $slider->update(['slider_image' => $image_path]);
+        }
+        return back()->withSuccess('Image for Slider Successfully Updated');
     }
 
     /**
