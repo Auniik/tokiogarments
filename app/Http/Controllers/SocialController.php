@@ -83,16 +83,12 @@ class SocialController extends Controller
     public function status(Request $request, Social $social)
     {
         if($social->status){
-            $social->update([
-                'status' => 0,
-            ]);
+            $social->update(['status' => 0]);
 
             return back()->withSuccess('Social Link Unpublished');
         }
         else{
-            $social->update([
-                'status' => 1,
-            ]);
+            $social->update(['status' => 1]);
             return back()->withSuccess('Social Link Published');
         }
 

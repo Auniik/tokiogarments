@@ -14,7 +14,8 @@ class MenuController extends Controller
      */
     public function index()
     {
-        //
+        $menus = Menu::paginate();
+        return view('backend.menu.index', compact('menus'));
     }
 
     /**
@@ -24,7 +25,8 @@ class MenuController extends Controller
      */
     public function create()
     {
-        //
+        $data = Menu::latest()->first();
+        return view('backend.menu.create', compact('data'));
     }
 
     /**
@@ -35,7 +37,18 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+           'name' => 'required',
+           'slug' => 'required',
+           'serial' => 'required',
+        ]);
+        str_slug($request->slug) == null ? $slug="#" : $slug = $request->slug;
+        $menu = new Menu();
+        $menu->name = $request->name;
+        $menu->slug = $slug;
+        $menu->serial = $request->serial;
+        $menu->save();
+        return back()->withSuccess('Menu added successfully!');
     }
 
     /**
@@ -57,7 +70,7 @@ class MenuController extends Controller
      */
     public function edit(Menu $menu)
     {
-        //
+        return view('backend.menu.edit', compact('menu'));
     }
 
     /**
@@ -69,7 +82,18 @@ class MenuController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
-        //
+        $request->validate([
+           'name' => 'required',
+           'slug' => 'required',
+           'serial' => 'required',
+        ]);
+        str_slug($request->slug) == null ? $slug="#" : $slug = $request->slug;
+        $menu->update([
+            'name' => $request->name,
+            'slug' => $slug,
+            'serial' => $request->serial,
+        ]);
+        return back()->withSuccess('Menu updated successfully');
     }
 
     /**
@@ -80,6 +104,7 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
-        //
+        $menu->delete();
+        return back()->withSuccess('Menu deleted successfully');
     }
 }

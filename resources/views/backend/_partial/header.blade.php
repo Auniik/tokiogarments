@@ -74,7 +74,7 @@
         <li><a class="app-menu__item {{ $path  == '/' ? 'active' : '' }}" target="_blank" href="{{ url('/') }}"><i class="app-menu__icon fa fa-external-link"></i><span class="app-menu__label">Visit Site</span></a></li>
         <li><a class="app-menu__item {{ $path  == 'dashboard' ? 'active' : '' }}" href="{{ url('dashboard') }}"><i class="app-menu__icon fa fa-dashboard"></i>  <span class="app-menu__label">Dashboard</span></a></li>
         <li><a class="app-menu__item  {{ starts_with($path, 'config') ? 'active' : '' }}" href="{{ route('config.index') }}"><i class="app-menu__icon fa fa-gear"></i><span class="app-menu__label">Global Settings</span></a></li>
-
+        <li><a class="app-menu__item  {{ starts_with($path, 'menus') ? 'active' : '' }}" href="{{ route('menus.index') }}"><i class="app-menu__icon fa fa-gear"></i><span class="app-menu__label">Menus</span></a></li>
         <li class="treeview"><a class="app-menu__item " href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-picture-o"></i><span class="app-menu__label">Photo Gallery</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item {{ starts_with($path,  'gallery-categories') ? 'active' : '' }}" href="{{ route('gallery-categories.index') }}"><i class="icon fa fa-circle-o"></i> Categories</a></li>
@@ -91,7 +91,7 @@
         </li>
         <li><a class="app-menu__item {{ starts_with($path, 'slider') ? 'active' : '' }}" href="{{ route('slider.index') }}"><i class="app-menu__icon fa fa-picture-o"></i><span class="app-menu__label">Slider</span></a></li>
         <li><a class="app-menu__item {{ starts_with($path, 'client') ? 'active' : '' }}" href="{{ route('client.index') }}"><i class="app-menu__icon fa fa-thumbs-o-up"></i><span class="app-menu__label">Client</span></a></li>
-        <li><a class="app-menu__item {{ starts_with($path,  'page') ? 'active' : '' }}" href="{{ route('page.index') }}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Page</span></a></li>
+        <li><a class="app-menu__item {{ starts_with($path,  'pages') ? 'active' : '' }}" href="{{ route('pages.index') }}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Page</span></a></li>
         <li><a class="app-menu__item {{ starts_with($path,  'equipment') ? 'active' : '' }}" href="{{ route('equipment.index') }}"><i class="app-menu__icon fa fa-cubes"></i><span class="app-menu__label">Equipment</span></a></li>
         <li><a class="app-menu__item {{ starts_with($path,  'compliances') ? 'active' : '' }}" href="{{ route('compliances.index') }}"><i class="app-menu__icon fa fa-sitemap"></i><span class="app-menu__label">Compliance</span></a></li>
 

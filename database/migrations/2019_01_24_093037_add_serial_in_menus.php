@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMenusTable extends Migration
+class AddSerialInMenus extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('menus', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('slug');
-            $table->timestamps();
+        Schema::table('menus', function (Blueprint $table) {
+            $table->tinyInteger('serial')->after('slug');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menus');
+        Schema::table('menus', function (Blueprint $table) {
+            $table->dropColumn('serial')->after('slug');
+        });
     }
 }

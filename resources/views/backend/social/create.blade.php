@@ -45,7 +45,7 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label>Social Name</label>
+                        <label>Status</label>
                         <select id="status" class="form-control" name="status">
                             <option value="1"> Active</option>
                             <option value="0"> Inactive</option>

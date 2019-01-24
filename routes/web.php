@@ -20,8 +20,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('client', 'ClientController');
 
 // page
-    Route::resource('page','PageController');
-    Route::get('page/{title}','PageController@single_page');
+    Route::resource('menus','MenuController');
+    Route::get('submenus/{id}', 'SubmenuController@index');
+    Route::resource('submenus', 'SubmenuController');
+
+    Route::resource('pages','PageController');
+
 
 //Production Unit
 //    Route::resource('production','Production\ProductionUnitController');
@@ -64,7 +68,7 @@ Route::get('policy', 'PolicyController@policy')->name('policy.page');
 
 Route::get('production-unit/{slug}', 'Production\ProductionUnitController@productionUnit')->name('production.unit');
 Route::get('compliance/{slug}', 'ComplianceController@view')->name('compliance.view');
-
+Route::get('page/{title}','PageController@single_page');
 //Route::get('/compliance', function (){
 //    return view('frontend.compliance ');
 //});

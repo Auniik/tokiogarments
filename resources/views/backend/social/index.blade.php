@@ -32,7 +32,7 @@
                         <td>{{ $sl++ }}</td>
                         <td><i class="{{ $social->icon }}" style="font-size:36px"></i></td>
                         <td><a href="{{ $social->profile_link }}"> {{ $social->profile_link }}</a></td>
-                        @if($social->status==1)
+                        @if($social->status)
                             <td>
                                 <span class="badge badge-success">Active</span>
                             </td>
@@ -46,11 +46,10 @@
                                 <form action="{{route('route.status', $social)}}" method="post">
                                     @csrf
                                     @method('patch')
-                                    @if($social->status==1)
+                                    @if($social->status)
                                         <button type="submit" class="btn btn-sm btn-warning" href="#"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></button>
                                     @else
-                                        <button type="submit" class="btn btn-sm btn-primary" href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                                        </button>
+                                        <button type="submit" class="btn btn-sm btn-primary" href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
                                     @endif
                                 </form>
                                 <form action="{{ route('social.destroy',$social) }}" method="post">

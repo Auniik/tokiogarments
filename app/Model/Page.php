@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
-    protected $fillable =['title','url','description'];
+    protected $fillable =['name', 'title','slug', 'pdf_document', 'description'];
 }

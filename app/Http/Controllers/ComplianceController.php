@@ -116,6 +116,7 @@ class ComplianceController extends Controller
             'title' => 'required|unique:compliances,title,'.$compliance->id,
             'homage' => 'required',
             'compliance_image.*' => 'required|image',
+            'pdf_document' => 'mimes:pdf',
         ]);
         if($request->hasfile('compliance_image'))
         {
@@ -133,7 +134,7 @@ class ComplianceController extends Controller
         }
 
         if ($request->hasFile('pdf_document')){
-            unlink($compliance->pdf_document);
+            if($compliance->pdf_document) unlink($compliance->pdf_document);
             $compliance->update(['pdf_document' => $request->file('pdf_document')->store(file_path('pdf/compliance'))]);
         }
 

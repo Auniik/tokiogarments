@@ -11,9 +11,7 @@ class PageController extends Controller
     public function index()
     {
         $pages = Page::all();
-        return view('backend.page.index',[
-            'pages' => $pages,
-        ]);
+        return view('backend.page.index', compact('pages'));
     }
 
     // create page
@@ -26,16 +24,24 @@ class PageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|unique:pages',
-            'description' => 'required',
+            'name' => 'required',
+            'title' => 'required',
+            'slug' => 'required|unique:pages',
+            'pdf_document' => 'mimes:pdf',
         ]);
-        Page::create([
-            'title' => $request->title,
-            'url' => str_slug($request->title),
-            'description' => $request->description,
-        ]);
+        //Pdf Upload
+        $page = new Page();
+        if ($request->hasFile('pdf_document')){
+            $page['pdf_document'] = $request->file('pdf_document')->store(file_path('pdf/page'));
+        }
+        str_slug($request->slug) == null ? $slug="#" : $slug = $request->slug;
+        $page['name'] = $request->name;
+        $page['title'] = $request->title;
+        $page['slug'] = $slug;
+        $page['description'] = $request->description;
+        $page->save();
 
-        return back()->with('success', 'Successfully Created');
+        return back()->withSuccess('Page Added Successfully');
     }
 
     // edit page
@@ -48,12 +54,20 @@ class PageController extends Controller
     public function update(Request $request, Page $page)
     {
         $request->validate([
+            'name' => 'required',
             'title' => 'required',
-            'url' => 'required|unique:pages,url,'.$page->id,
+            'slug' => 'required|unique:pages,slug,'.$page->id,
+            'pdf_document' => 'mimes:pdf',
         ]);
+        if ($request->hasFile('pdf_document')){
+            if ($page->pdf_document) unlink($page->pdf_document);
+            $page['pdf_document'] = $request->file('pdf_document')->store(file_path('pdf/page'));
+        }
+        str_slug($request->slug) == null ? $slug="#" : $slug = $request->slug;
         $page->update([
+            'name' => $request->name,
             'title' => $request->title,
-            'url' => str_slug($request->url),
+            'slug' => $slug,
             'description' => $request->description,
         ]);
 
@@ -61,12 +75,12 @@ class PageController extends Controller
     }
 
     // delete
-    public function destroy($id)
+    public function destroy(Page $page)
     {
-        $page =Page::find($id);
+        unlink($page->pdf_document);
         $page->delete();
 
-        return back()->with('success','Successfully Created');
+        return back()->withSuccess('Page Deleted Successfully');
     }
 
     // single page
