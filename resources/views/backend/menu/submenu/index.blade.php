@@ -1,24 +1,23 @@
 @extends('backend._partial.dashboard')
 @section('title', 'Menus')
-@section('PageHead', 'List of All Menus')
+@section('PageHead', 'List of All Sub Menus')
 @section('PageName', 'Tokio Garments Limited')
 @section('PageUrl')
-    <a href="{{ route('menus.create') }}">Add Menu</a>
+    <a href="{{ route('menus.create') }}">Add Submenu</a>
 @endsection
 
 @section('content')
+    @if( session()->has('success') )
+        <div class="alert alert-success">{{ Session::get('success') }}</div>
+    @endif
     <div class="row">
+
         <div class="col-md-6">
             <div class="tile">
                 <h3 class="tile-title">Add Service in Submenu</h3>
                 <div class="tile-body">
-                    <form action="{{ route('submenus.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('submenus.store', ['type' => 'service']) }}" method="post" enctype="multipart/form-data">
                         @csrf
-
-                        @if( session()->has('success') )
-                            <div class="alert alert-success">{{ Session::get('success') }}</div>
-                        @endif
-
                         <div class="form-group">
                             <label class="control-label">Submenu Name</label>
                             <input value="{{old('name')}}" class="form-control {{($errors->has('name')) ? 'is-invalid' : ''}}" type="text" name="name" placeholder="Enter Submenu name">
@@ -26,6 +25,7 @@
                                 <strong class="text-danger">{{ $errors->first('name') }}</strong>
                             @endif
                         </div>
+                        <input type="hidden" value="{{$menu->id}}" name="menu_id">
 
                         <div class="form-group">
                             <label class="control-label">Slug</label>
@@ -61,35 +61,34 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
                         <div class="tile-footer">
-                            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add Menu</button>
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add Sub Menu</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="text-danger">OR</div>
+        <div class="col-md-1 divider"><p>OR</p></div>
         <div class="col-md-5">
             <div class="tile">
                 <h3 class="tile-title">Add Page in Submenu</h3>
                 <div class="tile-body">
-                    <form action="{{ route('submenus.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('submenus.store', ['type' => 'page']) }}" method="post" enctype="multipart/form-data">
                         @csrf
 
-                        @if( session()->has('success') )
-                            <div class="alert alert-success">{{ Session::get('success') }}</div>
-                        @endif
+                        <input type="hidden" name="menu_id" value="{{$menu->id}}">
 
                         <div class="form-group">
-                            <label class="control-label">Submenu Name</label>
-                            <input value="{{old('name')}}" class="form-control {{($errors->has('name')) ? 'is-invalid' : ''}}" type="text" name="name" placeholder="Enter Submenu name">
-                            @if($errors->has('name'))
-                                <strong class="text-danger">{{ $errors->first('name') }}</strong>
+                            <label>Page Name</label>
+                            <select class="form-control {{($errors->has('page_id')) ? 'is-invalid' : ''}}" name="page_id" >
+                                <option value=""> Select One</option>
+                                @foreach($pages as $key => $page)
+                                    <option value="{{$page->id}}"> {{$page->name}}</option>
+                                @endforeach
+
+                            </select>
+                            @if($errors->has('page_id'))
+                                <div class="invalid-feedback">{{$errors->first('page_id')}}</div>
                             @endif
                         </div>
 
@@ -111,7 +110,7 @@
                         </div>
 
                         <div class="tile-footer">
-                            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add Menu</button>
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add Sub Menu</button>
                         </div>
                     </form>
                 </div>
@@ -122,11 +121,41 @@
 
         <div class="col-md-12">
             <div class="tile">
-                <h3 class="tile-title">Submenus</h3>
+                <h3 class="tile-title">List of Submenus</h3>
                 <div class="tile-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Sl</th>
+                            <th>Name</th>
+                            <th>Slug</th>
+                            <th>Sub Sub menu</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @php( $sl = $submenus->firstItem())
+                        @foreach($submenus as $key => $submenu)
+                            <tr>
+                                <td>{{ $sl++ }}</td>
+                                <td>{{ $submenu->name }}</td>
+                                <td>{{ $submenu->slug }}</td>
+                                <td><a class="btn btn-sm btn-outline-secondary" href="{{url('sub-submenus/'.$submenu->id)}}">Sub Sub menu</a></td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a class="btn btn-primary btn-sm"  href="{{ route('submenus.edit', $submenu) }}"><i class="fa fa-edit"></i></a>
+                                        <form action="{{ route('submenus.destroy', $submenu) }}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick=" return confirm('Are you Sure')" href="#"><i class="fa fa-trash-o"></i></button>
+                                        </form>
 
-
-
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

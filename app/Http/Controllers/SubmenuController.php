@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Page;
 use App\Model\Submenu;
 use App\Model\Menu;
+use function GuzzleHttp\Psr7\str;
 use Illuminate\Http\Request;
 
 class SubmenuController extends Controller
@@ -17,7 +19,11 @@ class SubmenuController extends Controller
     {
         $data = Submenu::latest()->first();
         $menu = Menu::find($id);
-        return view('backend.menu.submenu.index', compact('menu', 'data'));
+        $pages = Page::orderBy('created_at', 'desc')->get();
+        $submenus = Submenu::orderBy('created_at', 'desc')->paginate();
+
+
+        return view('backend.menu.submenu.index', compact('menu', 'data', 'pages', 'submenus'));
     }
 
     /**
@@ -38,7 +44,43 @@ class SubmenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $submenu = [];
+        $type = $request->query('type');
+        if($type == 'service'){
+            $request->validate([
+                'name' => 'required',
+                'serial' => 'required',
+                'slug' => 'required|unique:submenus'
+            ]);
+            $submenu['name'] = $request->name;
+            $submenu['slug'] = str_slug($request->slug);
+            $submenu['status'] = $request->status;
+            $submenu['menu_id'] = $request->menu_id;
+            $submenu['serial'] = $request->serial;
+        }
+
+//        dd();
+
+        if($type == 'page'){
+            $page = Page::find($request->page_id);
+            $request->validate([
+                'serial' => 'required',
+                'page_id' => 'required',
+            ]);
+
+
+            $submenu['name'] = $page->name;
+            $submenu['slug'] = $page->slug;
+            $submenu['status'] = $request->status;
+            $submenu['menu_id'] = $request->menu_id;
+            $submenu['serial'] = $request->serial;
+        }
+
+//        str_slug($request->slug) == null ? $slug="#" : $slug = $request->slug;
+
+        Submenu::create($submenu);
+
+        return back()->withSuccess('Submenu Added Successfully');
     }
 
     /**
@@ -60,7 +102,7 @@ class SubmenuController extends Controller
      */
     public function edit(Submenu $submenu)
     {
-        //
+        return view('backend.menu.submenu.edit', compact('submenu'));
     }
 
     /**
@@ -83,6 +125,7 @@ class SubmenuController extends Controller
      */
     public function destroy(Submenu $submenu)
     {
-        //
+        $submenu->delete();
+        return back()->withSuccess('Submenu Deleted Successfully');
     }
 }

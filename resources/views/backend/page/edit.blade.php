@@ -41,7 +41,8 @@
                             <label class="sr-only" for="exampleInputAmount">Enter  a unique slug</label>
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text"><?php echo url('/page')  ?>/</span></div>
-                                <input class="form-control {{($errors->has('slug')) ? 'is-invalid' : ''}}" type="text" value="{{$page->slug}}" name="slug">
+                                <input class="form-control {{($errors->has('slug')) ? 'is-invalid' : ''}}" type="text" value="{{starts_with($page->slug, 'page') ? substr($page->slug, 5) : ''}}" name="slug">
+
                                 @if($errors->has('slug'))
                                     <div class="invalid-feedback">
                                         {{$errors->first('slug')}}

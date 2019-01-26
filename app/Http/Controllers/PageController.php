@@ -34,7 +34,7 @@ class PageController extends Controller
         if ($request->hasFile('pdf_document')){
             $page['pdf_document'] = $request->file('pdf_document')->store(file_path('pdf/page'));
         }
-        str_slug($request->slug) == null ? $slug="#" : $slug = $request->slug;
+        str_slug($request->slug) == null ? $slug="#" : $slug = 'page/'.str_slug($request->slug);
         $page['name'] = $request->name;
         $page['title'] = $request->title;
         $page['slug'] = $slug;
@@ -63,11 +63,14 @@ class PageController extends Controller
             if ($page->pdf_document) unlink($page->pdf_document);
             $page['pdf_document'] = $request->file('pdf_document')->store(file_path('pdf/page'));
         }
-        str_slug($request->slug) == null ? $slug="#" : $slug = $request->slug;
+        str_slug($request->slug) == null ? $slug="#" : $slug = str_slug($request->slug);
+//        $slug = substr($slug, 5);
+
+
         $page->update([
             'name' => $request->name,
             'title' => $request->title,
-            'slug' => $slug,
+            'slug' => 'page/'.$slug,
             'description' => $request->description,
         ]);
 
@@ -84,11 +87,9 @@ class PageController extends Controller
     }
 
     // single page
-    public function single_page($title){
-        $page = Page::find($title);
-        return view('front_end.single_page',[
-            'page' => $page,
-        ]);
+    public function single_page($slug){
+        $page = Page::find($slug);
+        return view('frontend.single_page', compact('page'));
     }
 
 }
