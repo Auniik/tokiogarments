@@ -14,6 +14,7 @@
             <div class="alert alert-success">{{ Session::get('success') }}</div><br>
         @endif
         <div class="tile">
+            <a class="btn btn-warning pull-right" href="{{url('equipments')}}">Visit Equipments</a>
             <h3 class="tile-title">Equipment List</h3>
             <table class="table table-striped">
                 <thead>

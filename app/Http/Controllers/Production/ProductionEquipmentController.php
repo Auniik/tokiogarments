@@ -16,8 +16,8 @@ class ProductionEquipmentController extends Controller
      */
     public function index()
     {
-        $productionUnits = ProductionUnit::where('status',1)->get();
-        $productionEquipments = ProductionEquipment::orderBy('production_unit_id', 'asc')->paginate(20);
+        $productionUnits = ProductionUnit::get();
+        $productionEquipments = ProductionEquipment::where('status',1)->orderBy('production_unit_id', 'asc')->paginate(20);
         return view('backend.production.equipment.index', compact('productionUnits','productionEquipments'));
     }
 

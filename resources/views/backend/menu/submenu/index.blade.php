@@ -1,9 +1,9 @@
 @extends('backend._partial.dashboard')
-@section('title', 'Menus')
+@section('title', 'Submenus')
 @section('PageHead', 'List of All Sub Menus')
 @section('PageName', 'Tokio Garments Limited')
 @section('PageUrl')
-    <a href="{{ route('menus.create') }}">Add Submenu</a>
+    <a href="{{ route('menus.index') }}">Menus</a>
 @endsection
 
 @section('content')
@@ -139,7 +139,7 @@
                             <tr>
                                 <td>{{ $sl++ }}</td>
                                 <td>{{ $submenu->name }}</td>
-                                <td>{{ $submenu->slug }}</td>
+                                <td><a target="_blank" href="{{ url('/'.$submenu->slug) }}">{{ url('/'.$submenu->slug) }}</a></td>
                                 <td><a class="btn btn-sm btn-outline-secondary" href="{{url('sub-submenus/'.$submenu->id)}}">Sub Sub menu</a></td>
                                 <td>
                                     <div class="btn-group">

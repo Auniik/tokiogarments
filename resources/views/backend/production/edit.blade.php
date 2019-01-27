@@ -57,14 +57,6 @@
                         @endif
                     </div>
 
-                    <div class="form-group">
-                        <label>Status</label>
-                        <select class="form-control" name="status">
-                            <option {{$productionUnit->status == 1 ? 'selected' : ''}} value="1"> Active</option>
-                            <option {{$productionUnit->status == 0 ? 'selected' : ''}} value="0"> Inactive</option>
-                        </select>
-                    </div>
-
                     <div class="tile-footer">
                         <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save Changes</button>
                     </div>

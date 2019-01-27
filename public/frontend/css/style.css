@@ -1648,6 +1648,7 @@ ul.navbar-nav > li {
   display: inline-block;
   position: relative;
   padding-right: 10px;
+    z-index: 9999;
 }
 ul.navbar-nav > li:last-child {
   padding-right: 0;
@@ -1760,7 +1761,7 @@ ul.navbar-nav > li > a i {
 }
 @media (min-width: 992px){
    .dropdown-menu{
-      background: #fff;
+      background: #212529;
    }
 }
 .dropdown-menu.menu-center {
@@ -1794,6 +1795,7 @@ ul.navbar-nav > li > a i {
 
 .navbar-nav > li > .dropdown-menu a {
   background: none;
+  color: #fff;
 }
 
 .dropdown-menu li a {

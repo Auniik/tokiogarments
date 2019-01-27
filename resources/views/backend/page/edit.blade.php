@@ -55,7 +55,12 @@
                     {{--PDF SHOWING--}}
                     @if ($page->pdf_document!=null)
                         <div class="pdf-wrap">
-                            <span class="close">&times;</span>
+
+                            {{--<form action="{{ route('pdf.delete',$page->id) }}" method="post">--}}
+                                {{--@csrf--}}
+                                {{--@method('put')--}}
+                                {{--<button type="submit" class="btn btn-sm pull-right" onclick=" return confirm('Are you Sure')" href="#"><span class="close">&times;</span></button>--}}
+                            {{--</form>--}}
                             <div class="embed-responsive embed-responsive-21by9">
                                 <iframe class="embed-responsive-item" src="{{url($page->pdf_document)}}" height="300" allowfullscreen></iframe>
                             </div>

@@ -6,9 +6,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 // basic info
-    Route::get('config', 'BasicInfoController@index')->name('config.index');
-    Route::post('config/save', 'BasicInfoController@store')->name('config.store');
-    Route::post('config/update', 'BasicInfoController@update')->name('config.update');
+    Route::get('config', 'SiteConfigurationController@index')->name('config.index');
+    Route::post('config/save', 'SiteConfigurationController@store')->name('config.store');
+    Route::post('config/update', 'SiteConfigurationController@update')->name('config.update');
     Route::get('config/policy', 'PolicyController@index')->name('policy.index');
     Route::post('config/policy/save', 'PolicyController@store')->name('policy.store');
     Route::patch('config/policy/update', 'PolicyController@update')->name('policy.update');
@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('submenus', 'SubmenuController');
 
     Route::resource('pages','PageController');
+//    Route::put('delete-pdf/{page}','PageController@delete_pdf')->name('pdf.delete');
 
 
 //Production Unit

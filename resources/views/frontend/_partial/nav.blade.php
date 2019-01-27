@@ -7,32 +7,40 @@
 
             <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
                 <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a href="{{route('index')}}">Home</a>
-                    </li>
-                    <!-- li end-->
-                    {{--@foreach()--}}
-                    <li class="nav-item dropdown"><a class="nav-link" href="#" data-toggle="dropdown">Products<i class="fa fa-angle-down"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">404</a></li>
-                            <li class="dropdown-submenu"><a class="nav-link" href="#" data-toggle="dropdown">Kids Wear</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Child Menu 1</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
+                    {{--<li class="nav-item dropdown">--}}
+                        {{--<a href="{{route('index')}}">Home</a>--}}
+                    {{--</li>--}}
                     <!-- li end-->
 
+                    @foreach($menus as $menu)
+                        @if (count($menu->submenus) == 0)
+                                <li class="nav-item dropdown">
+                                    <a href="{{url($menu->slug)}}">{{$menu->name}}</a>
+                                </li>
+                            @else
+                                <li class="nav-item dropdown menu-nav">
+                                    <a class="nav-link" href="{{url($menu->slug)}}" data-toggle="dropdown">{{$menu->name}}<i class="fa fa-angle-down"></i></a>
+                        @endif
+
+                        <ul class="dropdown-menu" role="menu">
+                            @foreach($menu->submenus as $submenu)
+                            <li><a href="{{url($submenu->slug)}}">{{$submenu->name}}</a></li>
+                            {{--<li class="dropdown-submenu"><a class="nav-link" href="#" data-toggle="dropdown">Kids Wear</a>--}}
+                                {{--<ul class="dropdown-menu">--}}
+                                    {{--<li><a href="#">Child Menu 1</a></li>--}}
+                                {{--</ul>--}}
+                            {{--</li>--}}
+                            @endforeach
+                        </ul>
                     </li>
+                    @endforeach
                     <!-- li end-->
-                    <li class="nav-item dropdown">
-                        <a href="{{url('contact')}}">Contact</a>
+
                     </li>
                 </ul>
                 <!--Nav ul end-->
             </div>
-            <a href="#" class="top-right-btn btn btn-primary">Request a Quote</a>
+            <a href="{{url('contact')}}" class="top-right-btn btn btn-primary">Contact</a>
             <!-- Top bar btn -->
         </nav>
         <!-- Collapse end-->

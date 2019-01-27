@@ -1,7 +1,6 @@
 @extends('frontend._partial.app')
 @section('title', 'Contact Us')
 @section('body')
-<?php $basic=DB::table('basic_infos')->where('id', 1)->first() ?>
   <!-- start office -->
 <section class="address">
   <div class="container">
@@ -13,7 +12,7 @@
               <p>{{$basic->address}}</p>
               <div class="fan-page">
                
-                <div class="fb-page" data-href="{{$basic->facebook_page}}" data-tabs="timeline" data-width="350" data-height="250" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquotstylee cite="{{$basic->facebook_page}}" class="fb-xfbml-parse-ignore"><a href="{{$basic->facebook_page}}"> {{$basic->title}}</a></blockquotstylee></div>
+                <div class="fb-page" data-href="{{$basic->facebook_page}}" data-tabs="timeline" data-width="350" data-height="250" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote  cite="{{$basic->facebook_page}}" class="fb-xfbml-parse-ignore"><a href="{{$basic->facebook_page}}"> {{$basic->title}}</a></blockquote></div>
               </div>
             </ul>
           </div>

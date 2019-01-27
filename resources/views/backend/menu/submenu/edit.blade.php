@@ -1,5 +1,5 @@
 @extends('backend._partial.dashboard')
-@section('title', 'Menus')
+@section('title', 'Submenus')
 @section('PageHead', 'Edit Submenu')
 @section('PageName', 'Tokio Garments Limited')
 @section('PageUrl')
@@ -18,6 +18,15 @@
                 <div class="tile-body">
                     <form action="{{ route('submenus.update', $submenu) }}" method="post" enctype="multipart/form-data">
                         @csrf
+                        @method('patch')
+
+                        <div class="form-group">
+                            <label class="control-label">Submenu Name</label>
+                            <input class="form-control {{($errors->has('name')) ? 'is-invalid' : ''}}" type="text" value="{{$submenu->name}}" name="name" placeholder="Enter submenu name">
+                            @if($errors->has('name'))
+                                <div class="invalid-feedback">{{$errors->first('name')}}</div>
+                            @endif
+                        </div>
 
                         <input type="hidden" name="menu_id" value="{{$submenu->menu_id}}">
 
@@ -27,7 +36,7 @@
                                 <label class="sr-only" for="exampleInputAmount">Enter  a unique slug</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><?php echo url('/')  ?>/</span></div>
-                                    <input class="form-control {{($errors->has('slug')) ? 'is-invalid' : ''}}" type="text" value="{{old('slug')}}" name="slug">
+                                    <input class="form-control {{($errors->has('slug')) ? 'is-invalid' : ''}}" type="text" value="{{$submenu->slug}}" name="slug">
                                     @if($errors->has('slug'))
                                         <div class="invalid-feedback">{{$errors->first('slug')}}</div>
                                     @endif
@@ -48,7 +57,7 @@
                             <label>Status</label>
                             <select id="status" class="form-control" name="status">
                                 <option {{$submenu->status ? 'selected' : ''}} value="1"> Active</option>
-                                <option {{$submenu->status ? '' : 'selected '}}value="0"> Inactive</option>
+                                <option {{$submenu->status ? '' : 'selected'}} value="0"> Inactive</option>
                             </select>
                         </div>
 

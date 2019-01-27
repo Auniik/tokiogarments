@@ -17,8 +17,8 @@ class ProductionCategoryController extends Controller
      */
     public function index()
     {
-        $productionUnits = ProductionUnit::where('status',1)->get();
-        $productionCategories = ProductionCategory::orderBy('production_unit_id', 'asc')->paginate(20);
+        $productionUnits = ProductionUnit::get();
+        $productionCategories = ProductionCategory::orderBy('production_unit_id', 'asc')->where('status',1)->paginate(20);
         return view('backend.production.category.index', compact('productionCategories','productionUnits'));
     }
 

@@ -34,7 +34,7 @@ class PolicyController extends Controller
      */
     public function create()
     {
-        return view('backend.basic.policy.create');
+        return view('backend.basic_config.policy.create');
     }
 
     /**
@@ -72,7 +72,7 @@ class PolicyController extends Controller
      */
     public function edit(Policy $policy)
     {
-        return view('backend.basic.policy.edit', compact('policy'));
+        return view('backend.basic_config.policy.edit', compact('policy'));
     }
     public function update(Request $request)
     {

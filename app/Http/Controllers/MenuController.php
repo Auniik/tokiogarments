@@ -42,10 +42,10 @@ class MenuController extends Controller
            'slug' => 'required',
            'serial' => 'required',
         ]);
-        str_slug($request->slug) == null ? $slug="#" : $slug = $request->slug;
+//        str_slug($request->slug) == null ? $slug="#" : $slug = $request->slug;
         $menu = new Menu();
         $menu->name = $request->name;
-        $menu->slug = $slug;
+        $menu->slug = str_replace(' ', '-', strtolower($request->slug));
         $menu->serial = $request->serial;
         $menu->save();
         return back()->withSuccess('Menu added successfully!');
@@ -87,10 +87,10 @@ class MenuController extends Controller
            'slug' => 'required',
            'serial' => 'required',
         ]);
-        str_slug($request->slug) == null ? $slug="#" : $slug = $request->slug;
+//        str_slug($request->slug) == null ? $slug="#" : $slug = $request->slug;
         $menu->update([
             'name' => $request->name,
-            'slug' => $slug,
+            'slug' => str_replace(' ', '-', strtolower($request->slug)),
             'serial' => $request->serial,
         ]);
         return back()->withSuccess('Menu updated successfully');

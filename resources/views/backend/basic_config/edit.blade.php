@@ -12,16 +12,15 @@
     <div class="col-md-8">
         <div class="tile">
             <div class="tile-body">
-                <form action="{{ route('config.update',$config->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('config.update') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    @method('patch')
 
                     @if( session()->has('success') )
                         <div class="alert alert-success">{{ Session::get('success') }}</div><br>
                     @endif
 
                     <div class="form-group">
-                        <label class="control-label">Change Company Logo</label>
+                        <label class="control-label">Company Logo</label>
                         <img class="small-img" src="{{ url($config->logo) }}">
                         <input class="form-control" type="file" name="logo">
                     </div>
@@ -37,13 +36,18 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="control-label">Additional Phone Numbers</label>
+                        <input class="form-control" type="text" name="additional_phones" value="{{ $config->additional_phones }}">
+                    </div>
+
+                    <div class="form-group">
                         <label class="control-label">Email</label>
                         <input class="form-control" type="email" name="email" value="{{ $config->email }}">
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">Meta Description</label>
-                        <textarea name="meta_discription" class="form-control" rows="5">{{ $config->meta_discription }}</textarea>
+                        <textarea name="meta_description" class="form-control" rows="5">{{ $config->meta_description }}</textarea>
                     </div>
 
                     <div class="form-group">
@@ -70,13 +74,12 @@
                         <input class="form-control" type="text" name="facebook_page" value="{{ $config->facebook_page }}">
                     </div>
 
-
-            <div class="tile-footer">
-                <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save Changes</button>
+                    <div class="tile-footer">
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save Changes</button>
+                    </div>
+                </form>
             </div>
-            </form>
         </div>
-    </div>
 
 
 @endsection

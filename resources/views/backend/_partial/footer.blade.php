@@ -11,6 +11,8 @@
 <script src="{{ asset('/')  }}backend/js/plugins/pace.min.js"></script>
 <!-- Page specific javascripts-->
 <script type="text/javascript" src="{{ asset('/')  }}backend/js/plugins/chart.js"></script>
+@notify_js
+@notify_render
 <script type="text/javascript">
     var data = {
         labels: ["January", "February", "March", "April", "May"],

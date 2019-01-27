@@ -61,14 +61,6 @@
                     @endif
                 </div>
 
-                <div class="form-group">
-                    <label>Status</label>
-                    <select class="form-control" name="status">
-                        <option value="1"> Active</option>
-                        <option value="0"> Inactive</option>
-                    </select>
-                </div>
-
                 <div class="tile-footer">
                     <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add Production Unit</button>
                 </div>
@@ -88,7 +80,6 @@
                     <th>Floor Space</th>
                     <th>Capacity</th>
                     <th>Image Details</th>
-                    <th>Status</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -101,7 +92,7 @@
                         <td>{{ $unit->space }}</td>
                         <td>{{ $unit->capacity }}</td>
                         <td>{{ $unit->image_details }}</td>
-                        <td>{!! status($unit->status) !!}</td>
+                        {{--<td>{!! status($unit->status) !!}</td>--}}
                         <td>
                             <div class="btn-group">
                                 <a class="btn btn-warning btn-sm" href="{{ route('production.unit', $unit->slug) }}"><i class="fa fa-eye"></i></a>

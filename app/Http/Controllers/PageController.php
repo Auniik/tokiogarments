@@ -49,6 +49,9 @@ class PageController extends Controller
     {
         return view('backend.page.edit', compact('page'));
     }
+    public function show(Page $page)
+    {
+    }
 
     // update
     public function update(Request $request, Page $page)
@@ -80,15 +83,24 @@ class PageController extends Controller
     // delete
     public function destroy(Page $page)
     {
-        unlink($page->pdf_document);
+        if ($page->pdf_document) unlink($page->pdf_document);
         $page->delete();
 
         return back()->withSuccess('Page Deleted Successfully');
     }
+//    public function delete_pdf(Page $page)
+//    {
+//        if ($page->pdf_document) {
+//            unlink($page->pdf_document);
+//            $page->update(['pdf_document' => null]);
+//            return back()->withSuccess('PDF Deleted');
+//        }
+//
+//    }
 
     // single page
     public function single_page($slug){
-        $page = Page::find($slug);
+        $page = Page::where('slug', 'page/'.$slug)->first();
         return view('frontend.single_page', compact('page'));
     }
 
